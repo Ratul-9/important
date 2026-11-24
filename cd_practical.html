@@ -1,0 +1,4166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>iem@iem-MS-7D82: ~</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono:wght@400;700&family=Ubuntu:wght@400;500;700&display=swap');
+    
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #000;
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Ubuntu', sans-serif;
+      user-select: text;
+    }
+    
+    .gnome-topbar {
+      height: 28px;
+      background-color: #1a1a1a;
+      color: #dfdfdf;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 10px;
+      font-size: 14px;
+    }
+    .gnome-topbar .time {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      font-weight: 500;
+    }
+    
+    .terminal-container {
+      background-color: #300a24;
+      height: calc(100vh - 28px);
+      display: flex;
+      flex-direction: column;
+    }
+    
+    .terminal-header {
+      background: linear-gradient(to bottom, #4a1f3b, #3b112c);
+      color: #dfdfdf;
+      height: 38px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      font-size: 14px;
+      font-weight: 700;
+      border-bottom: 1px solid rgba(0,0,0,0.5);
+    }
+    
+    .window-controls {
+      position: absolute;
+      right: 12px;
+      display: flex;
+      gap: 12px;
+    }
+    .btn {
+      width: 13px;
+      height: 13px;
+      border-radius: 50%;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .btn-close { background: #ed544a; }
+    .btn-min { background: #f0bd35; }
+    .btn-max { background: #1bc133; }
+    
+    /* Simulate terminal icon */
+    .terminal-icon {
+      position: absolute;
+      left: 10px;
+      color: white;
+      font-size: 16px;
+    }
+    
+    .terminal-body {
+      padding: 5px;
+      flex: 1;
+      overflow-y: auto;
+      font-family: 'Ubuntu Mono', monospace;
+      font-size: 15px;
+      color: #eeeeec;
+      line-height: 1.3;
+    }
+    
+    .terminal-body::-webkit-scrollbar { width: 10px; }
+    .terminal-body::-webkit-scrollbar-thumb { 
+      background: rgba(255,255,255,0.2); 
+      border-radius: 5px; 
+    }
+
+    .prompt-user { color: #8ae234; font-weight: bold; }
+    .prompt-tilde { color: #729fcf; font-weight: bold; }
+    .cmd { color: #ffffff; }
+    
+    .line {
+      display: flex;
+      margin: 1px 0;
+    }
+    .prompt-col {
+      white-space: pre;
+      margin-right: 8px;
+    }
+    .content-col {
+      flex: 1;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+    .output-line {
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      color: #d3d7cf;
+      margin: 1px 0;
+    }
+    .output-line:empty { min-height: 1.3em; }
+    .cursor {
+      display: inline-block;
+      width: 8px;
+      height: 15px;
+      background: #fff;
+      animation: blink 1s step-end infinite;
+      vertical-align: middle;
+      margin-left: 2px;
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+
+    #original-content { display: none; }
+  </style>
+</head>
+<body>
+
+<div class="gnome-topbar">
+  <div>Activities</div>
+  <div class="time" id="clock">Mar 9 10:01</div>
+  <div style="display:flex;gap:12px;font-size:12px;align-items:center;">
+    <span>🔊</span><span>🔋</span><span>⏻</span>
+  </div>
+</div>
+
+<div class="terminal-container">
+  <div class="terminal-header">
+    <div class="terminal-icon">⎕</div>
+    <div class="title">iem@iem-MS-7D82: ~</div>
+    <div class="window-controls">
+      <span class="btn btn-min"></span>
+      <span class="btn btn-max"></span>
+      <span class="btn btn-close"></span>
+    </div>
+  </div>
+  
+  <div class="terminal-body" id="term-body"></div>
+</div>
+
+<div id="original-content">
+  <h1>Compiler Design Practical – Questions &amp; Answers</h1>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>List of Questions  (★ = most likely)</h2>
+  <pre class="out">Part A – C Programs (File &amp; String Handling)
+  Q1   Copy the contents of input.c to output.txt character by character.
+  Q2   Count characters, words, lines, spaces and tabs in input.c and write the counts to output.txt.
+  Q3   Remove all single-line (//) and multi-line (/* */) comments from input.c and write the program to output.txt.  ★
+  Q4   Remove extra spaces, tabs and blank lines from input.c (many spaces become one space).
+  Q5   LEXICAL ANALYZER: read input.c and print every token with its type (keyword, identifier, constant, string, operator, special symbol) and line number into output.txt.  ★
+  Q6   Given a C program in an input file, print all the tokens between the opening '(' and closing ')' of every for loop into an output file.  ★
+  Q7   Print the tokens of the BODY of every for loop, i.e. between the opening '{' and its matching closing '}'.  ★
+  Q8   For every for loop, separate the header into its initialization, condition and update parts.  ★
+  Q9   Check whether the brackets ( ) { } [ ] in a C file are balanced, using a stack. Report the line number of the error.  ★
+  Q10  Count how many times each keyword and each identifier occurs in input.c.
+  Q11  Extract all string literals and character constants from input.c with their line numbers.
+  Q12  List all header files (#include) and macros (#define with value) in input.c.
+  Q13  Find all function names in input.c and say whether each is a definition or a call.
+  Q14  Build a SYMBOL TABLE (name, type, kind, line) from the declarations in input.c.  ★
+  Q15  words.txt has one word per line. Check whether each word is a valid C identifier and give the reason if it is not.  ★
+  Q16  Find all numeric constants in input.c and classify each as an integer or real constant.
+  Q17  Count the for/while/do/if/else/switch statements in input.c and show the line number of each.
+  Q18  Find all operators in input.c and classify them (arithmetic, relational, logical, assignment, inc/dec, bitwise).
+  Q19  Replace an identifier (whole word only) with another word throughout input.c, without changing the text inside strings.
+  Q20  Count vowels, consonants, digits, spaces and special characters in a text file.
+  Q21  Without string.h: for each line of a file, print the line reversed, each word reversed and the line in upper case.
+  Q22  Print every palindrome word in a text file (ignore case and punctuation), plus the longest word.
+  Q23  Count total, blank, comment, preprocessor and code lines in a C program.</pre>
+  <pre class="out">Part B – LEX Programs
+  L1   LEX: count the lines, words and characters of input.c.
+  L2   LEX: lexical analyzer. Identify keywords, identifiers, constants, strings, operators and symbols in input.c and write them to output.txt.  ★
+  L3   LEX: print all tokens between ( and ) of every for loop in input.c (using start conditions).  ★
+  L4   LEX: remove comments from input.c and write the program to output.txt. Count the comments.  ★
+  L5   LEX: count vowels and consonants in an input string.
+  L6   LEX: count positive and negative integers and fractions.
+  L7   LEX: count printf and scanf in prog.c and replace them with writef and readf.  ★
+  L8   LEX: classify each input word as keyword, identifier, integer, real, invalid identifier or operator.
+  L9   LEX: toggle the case of every letter in text.txt (upper to lower, lower to upper).
+  L10  LEX: decide whether a sentence is simple or compound (contains and/or/but...).
+  L11  LEX: validate each line of a file as an email id, a 10-digit mobile number, a date (dd/mm/yyyy) or invalid.</pre>
+  <pre class="out">Part C – LEX + YACC Programs
+  Y1   LEX + YACC: calculator. Evaluate arithmetic expressions with + - * / unary minus and brackets, using correct precedence.  ★
+  Y2   LEX + YACC: check whether an arithmetic expression is valid or invalid.  ★
+  Y3   LEX + YACC: recognize a valid variable name (letter or _ followed by letters, digits or _).
+  Y4   LEX + YACC: recognize the language a^n b^n (n &gt;= 1).
+  Y5   LEX + YACC: check the syntax of a for loop (supports nested loops, {} bodies and empty parts).  ★
+  Y6   LEX + YACC: convert an infix expression to postfix.  ★
+  Y7   LEX + YACC: validate a C declaration statement like  int a, b[10], c = 5;
+  Y8   LEX + YACC (bonus): generate three-address code for an assignment statement.</pre>
+  <pre class="out">Part D – Theory: syntax &amp; formats (file, string, Lex, Yacc) + viva questions</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Sample input file used by the programs</h2>
+  <pre>cat input.c</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+
+/* Program: sum and
+   pattern printing */
+int main()
+{
+    int i, j, n = 5, sum = 0;
+    float avg = 0.0;
+    char name[20] = "for loop demo";
+
+    // first loop: simple sum
+    for(i = 0; i &lt; n; i++)
+    {
+        sum = sum + i;
+    }
+
+    for (i = 1; i &lt;= MAX; i += 2) {
+        for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+            printf("%d ", i * j);
+        printf("\n");
+    }
+
+    avg = sum / 2.5;
+    if (avg &gt;= 1.5 &amp;&amp; sum != 0)
+        printf("Sum = %d, Avg = %f\n", sum, avg);
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Part A – C Programs (File &amp; String Handling)</h2>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q1 – Copy the contents of input.c to output.txt character by character.</h2>
+  <h3>Code – q01_copy.c</h3>
+  <pre>/* Q1. Copy the contents of input.c into output.txt (character by character).
+   This is the TEMPLATE for every file-handling program. */
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *in, *out;
+    int ch;                          /* int, NOT char -&gt; EOF is -1 */
+
+    in = fopen("input.c", "r");
+    if (in == NULL) {
+        printf("Error: cannot open input.c\n");
+        return 1;
+    }
+    out = fopen("output.txt", "w");
+
+    while ((ch = fgetc(in)) != EOF)  /* read one char      */
+        fputc(ch, out);              /* write one char     */
+
+    fclose(in);
+    fclose(out);
+    printf("File copied to output.txt\n");
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q01_copy.c -o q01</pre>
+  <pre>./q01</pre>
+  <pre class="out">File copied to output.txt</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+
+/* Program: sum and
+   pattern printing */
+int main()
+{
+    int i, j, n = 5, sum = 0;
+    float avg = 0.0;
+    char name[20] = "for loop demo";
+
+    // first loop: simple sum
+    for(i = 0; i &lt; n; i++)
+    {
+        sum = sum + i;
+    }
+
+    for (i = 1; i &lt;= MAX; i += 2) {
+        for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+            printf("%d ", i * j);
+        printf("\n");
+    }
+
+    avg = sum / 2.5;
+    if (avg &gt;= 1.5 &amp;&amp; sum != 0)
+        printf("Sum = %d, Avg = %f\n", sum, avg);
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q2 – Count characters, words, lines, spaces and tabs in input.c and write the counts to output.txt.</h2>
+  <h3>Code – q02_count.c</h3>
+  <pre>/* Q2. Count characters, words, lines, spaces and tabs in input.c
+       and write the result to output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    int ch, chars = 0, words = 0, lines = 0, spaces = 0, tabs = 0;
+    int inWord = 0;
+
+    if (in == NULL) { printf("Cannot open file\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF) {
+        chars++;
+        if (ch == '\n') lines++;
+        if (ch == ' ')  spaces++;
+        if (ch == '\t') tabs++;
+
+        if (isspace(ch))
+            inWord = 0;              /* word ended          */
+        else if (inWord == 0) {
+            inWord = 1;              /* a new word started  */
+            words++;
+        }
+    }
+
+    fprintf(out, "Characters : %d\n", chars);
+    fprintf(out, "Words      : %d\n", words);
+    fprintf(out, "Lines      : %d\n", lines);
+    fprintf(out, "Spaces     : %d\n", spaces);
+    fprintf(out, "Tabs       : %d\n", tabs);
+
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q02_count.c -o q02</pre>
+  <pre>./q02</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Characters : 532
+Words      : 106
+Lines      : 28
+Spaces     : 177
+Tabs       : 0</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q3 – Remove all single-line (//) and multi-line (/* */) comments from input.c and write the program to output.txt.  ★</h2>
+  <h3>Code – q03_remove_comments.c</h3>
+  <pre>/* Q3. Remove all comments ( // ... and slash-star ... star-slash )
+       from input.c and write the clean program to output.txt.
+       Comments inside string literals must NOT be touched. */
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    int ch, next, count = 0;
+
+    if (in == NULL) { printf("Cannot open file\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (ch == '"') {                       /* copy string as it is */
+            fputc(ch, out);
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '"') {
+                fputc(ch, out);
+                if (ch == '\\') fputc(fgetc(in), out);   /* \" inside string */
+            }
+            fputc('"', out);
+        }
+        else if (ch == '/') {
+            next = fgetc(in);
+            if (next == '/') {                 /* single-line comment */
+                while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '\n');
+                fputc('\n', out);
+                count++;
+            }
+            else if (next == '*') {            /* multi-line comment */
+                int prev = 0;
+                while ((ch = fgetc(in)) != EOF) {
+                    if (prev == '*' &amp;&amp; ch == '/') break;
+                    prev = ch;
+                }
+                count++;
+            }
+            else {                             /* just a division sign */
+                fputc(ch, out);
+                if (next != EOF) ungetc(next, in);
+            }
+        }
+        else
+            fputc(ch, out);
+    }
+    printf("Comments removed: %d\n", count);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q03_remove_comments.c -o q03</pre>
+  <pre>./q03</pre>
+  <pre class="out">Comments removed: 2</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+
+
+int main()
+{
+    int i, j, n = 5, sum = 0;
+    float avg = 0.0;
+    char name[20] = "for loop demo";
+
+    
+    for(i = 0; i &lt; n; i++)
+    {
+        sum = sum + i;
+    }
+
+    for (i = 1; i &lt;= MAX; i += 2) {
+        for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+            printf("%d ", i * j);
+        printf("\n");
+    }
+
+    avg = sum / 2.5;
+    if (avg &gt;= 1.5 &amp;&amp; sum != 0)
+        printf("Sum = %d, Avg = %f\n", sum, avg);
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q4 – Remove extra spaces, tabs and blank lines from input.c (many spaces become one space).</h2>
+  <h3>Code – q04_whitespace.c</h3>
+  <pre>/* Q4. Remove extra white spaces, tabs and blank lines from input.c.
+       Multiple spaces/tabs -&gt; one space, leading spaces removed,
+       empty lines removed. Output in output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char line[500], clean[500];
+    int i, k;
+
+    if (in == NULL) { printf("Cannot open file\n"); return 1; }
+
+    while (fgets(line, sizeof(line), in) != NULL) {   /* read one line */
+        k = 0;
+        for (i = 0; line[i] != '\0' &amp;&amp; line[i] != '\n'; i++) {
+            if (line[i] == ' ' || line[i] == '\t') {
+                /* add one space only if previous char is not a space
+                   and we are not at the beginning of the line          */
+                if (k &gt; 0 &amp;&amp; clean[k - 1] != ' ')
+                    clean[k++] = ' ';
+            } else
+                clean[k++] = line[i];
+        }
+        if (k &gt; 0 &amp;&amp; clean[k - 1] == ' ') k--;   /* trailing space */
+        clean[k] = '\0';
+
+        if (strlen(clean) &gt; 0)                   /* skip blank lines */
+            fprintf(out, "%s\n", clean);
+    }
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q04_whitespace.c -o q04</pre>
+  <pre>./q04</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+/* Program: sum and
+pattern printing */
+int main()
+{
+int i, j, n = 5, sum = 0;
+float avg = 0.0;
+char name[20] = "for loop demo";
+// first loop: simple sum
+for(i = 0; i &lt; n; i++)
+{
+sum = sum + i;
+}
+for (i = 1; i &lt;= MAX; i += 2) {
+for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+printf("%d ", i * j);
+printf("\n");
+}
+avg = sum / 2.5;
+if (avg &gt;= 1.5 &amp;&amp; sum != 0)
+printf("Sum = %d, Avg = %f\n", sum, avg);
+return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q5 – LEXICAL ANALYZER: read input.c and print every token with its type (keyword, identifier, constant, string, operator, special symbol) and line number into output.txt.  ★</h2>
+  <h3>Code – q05_lexer.c</h3>
+  <pre>/* Q5. LEXICAL ANALYZER in C.
+       Read input.c, break it into tokens and write every token with its
+       type and line number to output.txt. Comments are skipped.
+       Token types: KEYWORD, IDENTIFIER, CONSTANT, STRING, CHAR CONST,
+                    OPERATOR, SPECIAL SYMBOL, PREPROCESSOR            */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};
+
+char *ops2[] = {"++","--","==","!=","&lt;=","&gt;=","&amp;&amp;","||",
+                "+=","-=","*=","/=","%=","&lt;&lt;","&gt;&gt;","-&gt;"};
+
+int isKeyword(char *w)
+{
+    int i;
+    for (i = 0; i &lt; 32; i++)
+        if (strcmp(w, keywords[i]) == 0) return 1;
+    return 0;
+}
+
+int isOp2(char *p)                 /* is p[0]p[1] a 2-char operator? */
+{
+    int i;
+    for (i = 0; i &lt; 16; i++)
+        if (strncmp(p, ops2[i], 2) == 0) return 1;
+    return 0;
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], tok[200];
+    int n = 0, ch, i = 0, k, line = 1;
+    int nk = 0, ni = 0, nc = 0, ns = 0, no = 0, nsp = 0;
+
+    if (in == NULL) { printf("Cannot open file\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;   /* whole file -&gt; s */
+    s[n] = '\0';
+
+    fprintf(out, "%-6s%-26s%s\n", "LINE", "LEXEME", "TOKEN");
+    while (s[i] != '\0') {
+        k = 0;
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (isspace(s[i])) { i++; continue; }
+
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') {            /* // comment */
+            while (s[i] &amp;&amp; s[i] != '\n') i++;
+            continue;
+        }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {            /* block comment */
+            i += 2;
+            while (s[i] &amp;&amp; !(s[i] == '*' &amp;&amp; s[i+1] == '/')) {
+                if (s[i] == '\n') line++;
+                i++;
+            }
+            if (s[i]) i += 2;
+            continue;
+        }
+        if (s[i] == '#') {                             /* #include ... */
+            while (s[i] &amp;&amp; s[i] != '\n') tok[k++] = s[i++];
+            tok[k] = '\0';
+            fprintf(out, "%-6d%-26s%s\n", line, tok, "PREPROCESSOR");
+            continue;
+        }
+        if (isalpha(s[i]) || s[i] == '_') {            /* word */
+            while (isalnum(s[i]) || s[i] == '_') tok[k++] = s[i++];
+            tok[k] = '\0';
+            if (isKeyword(tok)) { fprintf(out, "%-6d%-26s%s\n", line, tok, "KEYWORD"); nk++; }
+            else                { fprintf(out, "%-6d%-26s%s\n", line, tok, "IDENTIFIER"); ni++; }
+        }
+        else if (isdigit(s[i])) {                      /* number */
+            while (isdigit(s[i]) || s[i] == '.') tok[k++] = s[i++];
+            tok[k] = '\0';
+            fprintf(out, "%-6d%-26s%s\n", line, tok, "CONSTANT"); nc++;
+        }
+        else if (s[i] == '"' || s[i] == '\'') {        /* "string" / 'c' */
+            char q = s[i];
+            tok[k++] = s[i++];
+            while (s[i] &amp;&amp; s[i] != q) {
+                if (s[i] == '\\') tok[k++] = s[i++];   /* escape: \n \" */
+                tok[k++] = s[i++];
+            }
+            tok[k++] = s[i++];
+            tok[k] = '\0';
+            fprintf(out, "%-6d%-26s%s\n", line, tok, q == '"' ? "STRING" : "CHAR CONST"); ns++;
+        }
+        else if (strchr("+-*/%=&lt;&gt;!&amp;|^~", s[i])) {      /* operator */
+            if (isOp2(&amp;s[i])) { tok[k++] = s[i++]; }
+            tok[k++] = s[i++];
+            tok[k] = '\0';
+            fprintf(out, "%-6d%-26s%s\n", line, tok, "OPERATOR"); no++;
+        }
+        else {                                         /* ( ) { } [ ] ; , */
+            tok[0] = s[i++]; tok[1] = '\0';
+            fprintf(out, "%-6d%-26s%s\n", line, tok, "SPECIAL SYMBOL"); nsp++;
+        }
+    }
+    fprintf(out, "\nKeywords=%d Identifiers=%d Constants=%d Strings=%d "
+                 "Operators=%d Special=%d\nTOTAL TOKENS=%d\n",
+            nk, ni, nc, ns, no, nsp, nk + ni + nc + ns + no + nsp);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q05_lexer.c -o q05</pre>
+  <pre>./q05</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">LINE  LEXEME                    TOKEN
+1     #include &lt;stdio.h&gt;        PREPROCESSOR
+2     #define MAX 10            PREPROCESSOR
+6     int                       KEYWORD
+6     main                      IDENTIFIER
+6     (                         SPECIAL SYMBOL
+6     )                         SPECIAL SYMBOL
+7     {                         SPECIAL SYMBOL
+8     int                       KEYWORD
+8     i                         IDENTIFIER
+8     ,                         SPECIAL SYMBOL
+8     j                         IDENTIFIER
+8     ,                         SPECIAL SYMBOL
+8     n                         IDENTIFIER
+8     =                         OPERATOR
+8     5                         CONSTANT
+8     ,                         SPECIAL SYMBOL
+8     sum                       IDENTIFIER
+8     =                         OPERATOR
+8     0                         CONSTANT
+8     ;                         SPECIAL SYMBOL
+9     float                     KEYWORD
+9     avg                       IDENTIFIER
+9     =                         OPERATOR
+9     0.0                       CONSTANT
+9     ;                         SPECIAL SYMBOL
+10    char                      KEYWORD
+10    name                      IDENTIFIER
+10    [                         SPECIAL SYMBOL
+10    20                        CONSTANT
+10    ]                         SPECIAL SYMBOL
+10    =                         OPERATOR
+10    "for loop demo"           STRING
+10    ;                         SPECIAL SYMBOL
+13    for                       KEYWORD
+13    (                         SPECIAL SYMBOL
+13    i                         IDENTIFIER
+13    =                         OPERATOR
+13    0                         CONSTANT
+13    ;                         SPECIAL SYMBOL
+13    i                         IDENTIFIER
+13    &lt;                         OPERATOR
+13    n                         IDENTIFIER
+13    ;                         SPECIAL SYMBOL
+13    i                         IDENTIFIER
+13    ++                        OPERATOR
+13    )                         SPECIAL SYMBOL
+14    {                         SPECIAL SYMBOL
+15    sum                       IDENTIFIER
+15    =                         OPERATOR
+15    sum                       IDENTIFIER
+15    +                         OPERATOR
+15    i                         IDENTIFIER
+15    ;                         SPECIAL SYMBOL
+16    }                         SPECIAL SYMBOL
+18    for                       KEYWORD
+18    (                         SPECIAL SYMBOL
+18    i                         IDENTIFIER
+18    =                         OPERATOR
+18    1                         CONSTANT
+18    ;                         SPECIAL SYMBOL
+18    i                         IDENTIFIER
+18    &lt;=                        OPERATOR
+18    MAX                       IDENTIFIER
+18    ;                         SPECIAL SYMBOL
+18    i                         IDENTIFIER
+18    +=                        OPERATOR
+18    2                         CONSTANT
+18    )                         SPECIAL SYMBOL
+18    {                         SPECIAL SYMBOL
+19    for                       KEYWORD
+19    (                         SPECIAL SYMBOL
+19    j                         IDENTIFIER
+19    =                         OPERATOR
+19    0                         CONSTANT
+19    ;                         SPECIAL SYMBOL
+19    j                         IDENTIFIER
+19    &lt;                         OPERATOR
+19    i                         IDENTIFIER
+19    &amp;&amp;                        OPERATOR
+19    j                         IDENTIFIER
+19    !=                        OPERATOR
+19    3                         CONSTANT
+19    ;                         SPECIAL SYMBOL
+19    j                         IDENTIFIER
+19    ++                        OPERATOR
+19    )                         SPECIAL SYMBOL
+20    printf                    IDENTIFIER
+20    (                         SPECIAL SYMBOL
+20    "%d "                     STRING
+20    ,                         SPECIAL SYMBOL
+20    i                         IDENTIFIER
+20    *                         OPERATOR
+20    j                         IDENTIFIER
+20    )                         SPECIAL SYMBOL
+20    ;                         SPECIAL SYMBOL
+21    printf                    IDENTIFIER
+21    (                         SPECIAL SYMBOL
+21    "\n"                      STRING
+21    )                         SPECIAL SYMBOL
+21    ;                         SPECIAL SYMBOL
+22    }                         SPECIAL SYMBOL
+24    avg                       IDENTIFIER
+24    =                         OPERATOR
+24    sum                       IDENTIFIER
+24    /                         OPERATOR
+24    2.5                       CONSTANT
+24    ;                         SPECIAL SYMBOL
+25    if                        KEYWORD
+25    (                         SPECIAL SYMBOL
+25    avg                       IDENTIFIER
+25    &gt;=                        OPERATOR
+25    1.5                       CONSTANT
+25    &amp;&amp;                        OPERATOR
+25    sum                       IDENTIFIER
+25    !=                        OPERATOR
+25    0                         CONSTANT
+25    )                         SPECIAL SYMBOL
+26    printf                    IDENTIFIER
+26    (                         SPECIAL SYMBOL
+26    "Sum = %d, Avg = %f\n"    STRING
+26    ,                         SPECIAL SYMBOL
+26    sum                       IDENTIFIER
+26    ,                         SPECIAL SYMBOL
+26    avg                       IDENTIFIER
+26    )                         SPECIAL SYMBOL
+26    ;                         SPECIAL SYMBOL
+27    return                    KEYWORD
+27    0                         CONSTANT
+27    ;                         SPECIAL SYMBOL
+28    }                         SPECIAL SYMBOL
+
+Keywords=9 Identifiers=34 Constants=13 Strings=4 Operators=23 Special=45
+TOTAL TOKENS=128</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q6 – Given a C program in an input file, print all the tokens between the opening '(' and closing ')' of every for loop into an output file.  ★</h2>
+  <h3>Code – q06_for_header_tokens.c</h3>
+  <pre>/* Q6. *** MOST EXPECTED ***
+   Read a C program from input.c. For every for loop, print all the
+   tokens between its opening '(' and closing ')' into output.txt.
+   e.g.  for(i = 0; i &lt; n; i++)  -&gt;  i  =  0  ;  i  &lt;  n  ;  i  ++
+   ("for" inside strings/comments is ignored; nested ( ) handled.)
+   To do the same for while / if / switch just change KEY below.   */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char KEY[] = "for";
+
+char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};
+
+int isKeyword(char *w)
+{
+    int i;
+    for (i = 0; i &lt; 32; i++)
+        if (strcmp(w, keywords[i]) == 0) return 1;
+    return 0;
+}
+
+/* tokenize s[start .. end-1] and write each token with its type */
+int printTokens(FILE *out, char *s, int start, int end)
+{
+    char tok[100];
+    int i = start, k, count = 0;
+    char *type;
+
+    while (i &lt; end) {
+        k = 0;
+        if (isspace(s[i])) { i++; continue; }
+
+        if (isalpha(s[i]) || s[i] == '_') {
+            while (i &lt; end &amp;&amp; (isalnum(s[i]) || s[i] == '_')) tok[k++] = s[i++];
+            tok[k] = '\0';
+            type = isKeyword(tok) ? "KEYWORD" : "IDENTIFIER";
+        }
+        else if (isdigit(s[i])) {
+            while (i &lt; end &amp;&amp; (isdigit(s[i]) || s[i] == '.')) tok[k++] = s[i++];
+            tok[k] = '\0';
+            type = "CONSTANT";
+        }
+        else if (s[i] == '"') {
+            tok[k++] = s[i++];
+            while (i &lt; end &amp;&amp; s[i] != '"') tok[k++] = s[i++];
+            tok[k++] = s[i++];
+            tok[k] = '\0';
+            type = "STRING";
+        }
+        else if (strchr("+-*/%=&lt;&gt;!&amp;|", s[i])) {
+            tok[k++] = s[i++];
+            /* 2-char operators: ++ -- &amp;&amp; || == != &lt;= &gt;= += -= *= /= */
+            if (s[i] == '=' || (s[i] == tok[0] &amp;&amp; strchr("+-&amp;|&lt;&gt;", s[i])))
+                tok[k++] = s[i++];
+            tok[k] = '\0';
+            type = "OPERATOR";
+        }
+        else {
+            tok[0] = s[i++]; tok[1] = '\0';
+            type = (tok[0] == ';' || tok[0] == ',') ? "SEPARATOR" : "SPECIAL SYMBOL";
+        }
+        fprintf(out, "   %-10s %s\n", tok, type);
+        count++;
+    }
+    return count;
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], word[100];
+    int n = 0, ch, i = 0, k, j, line = 1, loops = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i] != '\0') {
+        if (s[i] == '\n') { line++; i++; continue; }
+
+        /* skip comments and strings so "for" inside them is ignored */
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {
+            i += 2;
+            while (s[i] &amp;&amp; !(s[i] == '*' &amp;&amp; s[i+1] == '/')) { if (s[i] == '\n') line++; i++; }
+            if (s[i]) i += 2;
+            continue;
+        }
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') { if (s[i] == '\\') i++; i++; } i++; continue; }
+
+        if (isalpha(s[i]) || s[i] == '_') {          /* read a word */
+            k = 0;
+            while (isalnum(s[i]) || s[i] == '_') word[k++] = s[i++];
+            word[k] = '\0';
+
+            if (strcmp(word, KEY) == 0) {
+                j = i;
+                while (isspace(s[j])) j++;            /* for   (       */
+                if (s[j] != '(') continue;
+
+                int open = j, depth = 0;              /* find matching ) */
+                while (s[j]) {
+                    if (s[j] == '(') depth++;
+                    else if (s[j] == ')') { depth--; if (depth == 0) break; }
+                    j++;
+                }
+                loops++;
+                fprintf(out, "%s loop %d (line %d): %s", KEY, loops, line, KEY);
+                fwrite(&amp;s[open], 1, j - open + 1, out);   /* print header */
+                fprintf(out, "\n   Tokens between ( and ):\n");
+                int c = printTokens(out, s, open + 1, j);
+                fprintf(out, "   Total tokens = %d\n\n", c);
+            }
+            continue;
+        }
+        i++;
+    }
+    if (loops == 0) fprintf(out, "No %s loop found\n", KEY);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q06_for_header_tokens.c -o q06</pre>
+  <pre>./q06</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">for loop 1 (line 13): for(i = 0; i &lt; n; i++)
+   Tokens between ( and ):
+   i          IDENTIFIER
+   =          OPERATOR
+   0          CONSTANT
+   ;          SEPARATOR
+   i          IDENTIFIER
+   &lt;          OPERATOR
+   n          IDENTIFIER
+   ;          SEPARATOR
+   i          IDENTIFIER
+   ++         OPERATOR
+   Total tokens = 10
+
+for loop 2 (line 18): for(i = 1; i &lt;= MAX; i += 2)
+   Tokens between ( and ):
+   i          IDENTIFIER
+   =          OPERATOR
+   1          CONSTANT
+   ;          SEPARATOR
+   i          IDENTIFIER
+   &lt;=         OPERATOR
+   MAX        IDENTIFIER
+   ;          SEPARATOR
+   i          IDENTIFIER
+   +=         OPERATOR
+   2          CONSTANT
+   Total tokens = 11
+
+for loop 3 (line 19): for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+   Tokens between ( and ):
+   j          IDENTIFIER
+   =          OPERATOR
+   0          CONSTANT
+   ;          SEPARATOR
+   j          IDENTIFIER
+   &lt;          OPERATOR
+   i          IDENTIFIER
+   &amp;&amp;         OPERATOR
+   j          IDENTIFIER
+   !=         OPERATOR
+   3          CONSTANT
+   ;          SEPARATOR
+   j          IDENTIFIER
+   ++         OPERATOR
+   Total tokens = 14</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q7 – Print the tokens of the BODY of every for loop, i.e. between the opening '{' and its matching closing '}'.  ★</h2>
+  <h3>Code – q07_for_body_tokens.c</h3>
+  <pre>/* Q7. For every for loop in input.c print the tokens of its BODY,
+       i.e. everything between the opening '{' and its matching '}'.
+       If the loop has no braces, the body is the single statement
+       up to the next ';'. Output in output.txt                       */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+/* simple tokenizer: prints every token of s[start..end-1] on one line */
+int printTokens(FILE *out, char *s, int start, int end)
+{
+    int i = start, count = 0;
+    while (i &lt; end) {
+        if (isspace(s[i])) { i++; continue; }
+        fprintf(out, "   ");
+        if (isalnum(s[i]) || s[i] == '_') {                 /* word/number */
+            while (i &lt; end &amp;&amp; (isalnum(s[i]) || s[i] == '_' || s[i] == '.'))
+                fputc(s[i++], out);
+        }
+        else if (s[i] == '"') {                             /* string */
+            fputc(s[i++], out);
+            while (i &lt; end &amp;&amp; s[i] != '"') {
+                if (s[i] == '\\') fputc(s[i++], out);
+                fputc(s[i++], out);
+            }
+            fputc(s[i++], out);
+        }
+        else if (strchr("+-*/%=&lt;&gt;!&amp;|", s[i]) &amp;&amp;
+                 (s[i+1] == '=' || (s[i+1] == s[i] &amp;&amp; strchr("+-&amp;|", s[i])))) {
+            fputc(s[i++], out); fputc(s[i++], out);         /* ++ == &amp;&amp; */
+        }
+        else fputc(s[i++], out);                            /* 1 char  */
+        fputc('\n', out);
+        count++;
+    }
+    return count;
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000];
+    int n = 0, ch, i, j, depth, loops = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    for (i = 0; i &lt; n; i++) {
+        if (s[i] == '"') {                                  /* skip strings */
+            i++;
+            while (s[i] &amp;&amp; s[i] != '"') { if (s[i] == '\\') i++; i++; }
+            continue;
+        }
+        /* match whole word "for" */
+        if (strncmp(&amp;s[i], "for", 3) == 0 &amp;&amp;
+            (i == 0 || !(isalnum(s[i-1]) || s[i-1] == '_')) &amp;&amp;
+            !(isalnum(s[i+3]) || s[i+3] == '_')) {
+
+            j = i + 3;
+            while (isspace(s[j])) j++;
+            if (s[j] != '(') continue;
+
+            depth = 0;                                      /* skip (...) */
+            while (s[j]) {
+                if (s[j] == '(') depth++;
+                if (s[j] == ')' &amp;&amp; --depth == 0) break;
+                j++;
+            }
+            j++;
+            while (isspace(s[j])) j++;
+
+            int start, end;
+            if (s[j] == '{') {                              /* { ... } body */
+                start = j + 1;
+                depth = 0;
+                while (s[j]) {
+                    if (s[j] == '{') depth++;
+                    if (s[j] == '}' &amp;&amp; --depth == 0) break;
+                    j++;
+                }
+                end = j;
+            } else {                                        /* single stmt */
+                start = j;
+                while (s[j] &amp;&amp; s[j] != ';') j++;
+                end = j + 1;
+            }
+            loops++;
+            fprintf(out, "for loop %d body tokens:\n", loops);
+            int c = printTokens(out, s, start, end);
+            fprintf(out, "   Total = %d\n\n", c);
+        }
+    }
+    if (loops == 0) fprintf(out, "No for loop found\n");
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q07_for_body_tokens.c -o q07</pre>
+  <pre>./q07</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">for loop 1 body tokens:
+   sum
+   =
+   sum
+   +
+   i
+   ;
+   Total = 6
+
+for loop 2 body tokens:
+   for
+   (
+   j
+   =
+   0
+   ;
+   j
+   &lt;
+   i
+   &amp;&amp;
+   j
+   !=
+   3
+   ;
+   j
+   ++
+   )
+   printf
+   (
+   "%d "
+   ,
+   i
+   *
+   j
+   )
+   ;
+   printf
+   (
+   "\n"
+   )
+   ;
+   Total = 31
+
+for loop 3 body tokens:
+   printf
+   (
+   "%d "
+   ,
+   i
+   *
+   j
+   )
+   ;
+   Total = 9</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q8 – For every for loop, separate the header into its initialization, condition and update parts.  ★</h2>
+  <h3>Code – q08_for_parts.c</h3>
+  <pre>/* Q8. For every for loop in input.c separate the header into its
+       three parts: INITIALIZATION ; CONDITION ; INCREMENT/UPDATE
+       and write them to output.txt                                    */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+void trim(char *t)                       /* remove leading/trailing spaces */
+{
+    int a = 0, b = strlen(t) - 1, k = 0;
+    while (t[a] == ' ' || t[a] == '\t') a++;
+    while (b &gt;= a &amp;&amp; (t[b] == ' ' || t[b] == '\t')) b--;
+    while (a &lt;= b) t[k++] = t[a++];
+    t[k] = '\0';
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], part[3][200];
+    int n = 0, ch, i, j, p, k, depth, loops = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    for (i = 0; i &lt; n; i++) {
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') i++; continue; }
+
+        if (strncmp(&amp;s[i], "for", 3) == 0 &amp;&amp;
+            (i == 0 || !isalnum(s[i-1])) &amp;&amp; !isalnum(s[i+3]) &amp;&amp; s[i+3] != '_') {
+            j = i + 3;
+            while (isspace(s[j])) j++;
+            if (s[j] != '(') continue;
+            j++;                                  /* now just after '(' */
+
+            p = 0; k = 0; depth = 1;
+            while (s[j] &amp;&amp; depth &gt; 0) {
+                if (s[j] == '(') depth++;
+                if (s[j] == ')') depth--;
+                if (depth == 0) break;
+                if (s[j] == ';' &amp;&amp; depth == 1) {  /* ; separates parts */
+                    part[p][k] = '\0'; p++; k = 0;
+                } else
+                    part[p][k++] = s[j];
+                j++;
+            }
+            part[p][k] = '\0';
+            for (k = 0; k &lt; 3; k++) trim(part[k]);
+
+            loops++;
+            fprintf(out, "for loop %d\n", loops);
+            fprintf(out, "   Initialization : %s\n", strlen(part[0]) ? part[0] : "(empty)");
+            fprintf(out, "   Condition      : %s\n", strlen(part[1]) ? part[1] : "(empty)");
+            fprintf(out, "   Update         : %s\n\n", strlen(part[2]) ? part[2] : "(empty)");
+            i = j;
+        }
+    }
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q08_for_parts.c -o q08</pre>
+  <pre>./q08</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">for loop 1
+   Initialization : i = 0
+   Condition      : i &lt; n
+   Update         : i++
+
+for loop 2
+   Initialization : i = 1
+   Condition      : i &lt;= MAX
+   Update         : i += 2
+
+for loop 3
+   Initialization : j = 0
+   Condition      : j &lt; i &amp;&amp; j != 3
+   Update         : j++</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q9 – Check whether the brackets ( ) { } [ ] in a C file are balanced, using a stack. Report the line number of the error.  ★</h2>
+  <h3>Code – q09_balanced.c</h3>
+  <pre>/* Q9. Check whether all brackets ( ) { } [ ] in input.c are balanced,
+       using a STACK. Report the line number of the first error.
+       Brackets inside strings, char constants and comments are ignored. */
+#include &lt;stdio.h&gt;
+
+char stk[1000];
+int  stkLine[1000];
+int  top = -1;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    int ch, next, line = 1, error = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF &amp;&amp; !error) {
+        if (ch == '\n') line++;
+        else if (ch == '"' || ch == '\'') {            /* skip "..." '..' */
+            int q = ch;
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != q)
+                if (ch == '\\') fgetc(in);
+        }
+        else if (ch == '/') {
+            next = fgetc(in);
+            if (next == '/') { while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '\n'); line++; }
+            else if (next == '*') {
+                int prev = 0;
+                while ((ch = fgetc(in)) != EOF) {
+                    if (ch == '\n') line++;
+                    if (prev == '*' &amp;&amp; ch == '/') break;
+                    prev = ch;
+                }
+            }
+            else ungetc(next, in);
+        }
+        else if (ch == '(' || ch == '{' || ch == '[') {   /* PUSH */
+            stk[++top] = ch;
+            stkLine[top] = line;
+        }
+        else if (ch == ')' || ch == '}' || ch == ']') {   /* POP &amp; match */
+            char want = (ch == ')') ? '(' : (ch == '}') ? '{' : '[';
+            if (top == -1) {
+                fprintf(out, "Error: extra '%c' at line %d\n", ch, line);
+                error = 1;
+            } else if (stk[top] != want) {
+                fprintf(out, "Error: '%c' at line %d does not match '%c' opened at line %d\n",
+                        ch, line, stk[top], stkLine[top]);
+                error = 1;
+            } else
+                top--;
+        }
+    }
+    if (!error &amp;&amp; top != -1)
+        fprintf(out, "Error: '%c' opened at line %d is never closed\n", stk[top], stkLine[top]);
+    else if (!error)
+        fprintf(out, "All brackets are BALANCED\n");
+
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q09_balanced.c -o q09</pre>
+  <pre>./q09</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">All brackets are BALANCED</pre>
+  <pre>cp bad.c input.c</pre>
+  <pre>cat input.c</pre>
+  <pre class="out">int main()
+{
+    int a[5];
+    for(i = 0; i &lt; 5; i++
+    {
+        a[i] = i;
+    }
+}</pre>
+  <pre>./q09</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Error: '}' at line 8 does not match '(' opened at line 4</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q10 – Count how many times each keyword and each identifier occurs in input.c.</h2>
+  <h3>Code – q10_keyword_freq.c</h3>
+  <pre>/* Q10. Find which keywords are used in input.c and how many times each
+        one occurs. Also count total identifiers (unique). Output -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};
+int kcount[32];
+
+char ids[200][50];             /* unique identifiers */
+int  icount[200], nid = 0;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char word[100];
+    int ch, k, i, found;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (ch == '"') {                                  /* skip strings */
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '"') if (ch == '\\') fgetc(in);
+            continue;
+        }
+        if (ch == '#') {                                  /* skip #include line */
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '\n');
+            continue;
+        }
+        if (ch == '/') {                                  /* skip comments */
+            int nx = fgetc(in);
+            if (nx == '/') { while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '\n'); continue; }
+            if (nx == '*') {
+                int prev = 0;
+                while ((ch = fgetc(in)) != EOF) { if (prev == '*' &amp;&amp; ch == '/') break; prev = ch; }
+                continue;
+            }
+            ungetc(nx, in);
+            continue;
+        }
+        if (isalpha(ch) || ch == '_') {
+            k = 0;
+            while (ch != EOF &amp;&amp; (isalnum(ch) || ch == '_')) { word[k++] = ch; ch = fgetc(in); }
+            word[k] = '\0';
+            ungetc(ch, in);                               /* give back extra char */
+
+            found = 0;
+            for (i = 0; i &lt; 32; i++)
+                if (strcmp(word, keywords[i]) == 0) { kcount[i]++; found = 1; break; }
+
+            if (!found) {                                 /* identifier */
+                for (i = 0; i &lt; nid; i++)
+                    if (strcmp(ids[i], word) == 0) { icount[i]++; break; }
+                if (i == nid) { strcpy(ids[nid], word); icount[nid++] = 1; }
+            }
+        }
+    }
+
+    fprintf(out, "KEYWORD      COUNT\n");
+    for (i = 0; i &lt; 32; i++)
+        if (kcount[i] &gt; 0) fprintf(out, "%-12s %d\n", keywords[i], kcount[i]);
+
+    fprintf(out, "\nIDENTIFIER   COUNT\n");
+    for (i = 0; i &lt; nid; i++) fprintf(out, "%-12s %d\n", ids[i], icount[i]);
+    fprintf(out, "\nUnique identifiers = %d\n", nid);
+
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q10_keyword_freq.c -o q10</pre>
+  <pre>./q10</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">KEYWORD      COUNT
+char         1
+float        1
+for          3
+if           1
+int          2
+return       1
+
+IDENTIFIER   COUNT
+main         1
+i            10
+j            6
+n            2
+sum          6
+avg          4
+name         1
+MAX          1
+printf       3
+
+Unique identifiers = 9</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q11 – Extract all string literals and character constants from input.c with their line numbers.</h2>
+  <h3>Code – q11_strings.c</h3>
+  <pre>/* Q11. Extract all string literals ("...") and character constants ('.')
+        from input.c with their line numbers. Output -&gt; output.txt      */
+#include &lt;stdio.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    int ch, line = 1, ns = 0, nc = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (ch == '\n') line++;
+        else if (ch == '"') {
+            ns++;
+            fprintf(out, "Line %-3d STRING : \"", line);
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '"') {
+                fputc(ch, out);
+                if (ch == '\\') fputc(fgetc(in), out);   /* keep \n, \" */
+            }
+            fprintf(out, "\"\n");
+        }
+        else if (ch == '\'') {
+            nc++;
+            fprintf(out, "Line %-3d CHAR   : '", line);
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '\'') {
+                fputc(ch, out);
+                if (ch == '\\') fputc(fgetc(in), out);
+            }
+            fprintf(out, "'\n");
+        }
+    }
+    fprintf(out, "\nString literals = %d, Character constants = %d\n", ns, nc);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q11_strings.c -o q11</pre>
+  <pre>./q11</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Line 10  STRING : "for loop demo"
+Line 20  STRING : "%d "
+Line 21  STRING : "\n"
+Line 26  STRING : "Sum = %d, Avg = %f\n"
+
+String literals = 4, Character constants = 0</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q12 – List all header files (#include) and macros (#define with value) in input.c.</h2>
+  <h3>Code – q12_preprocessor.c</h3>
+  <pre>/* Q12. List all header files (#include) and macros (#define) in input.c.
+        For #define print macro name and its value. Output -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char line[500], name[100], value[300], header[100];
+    int nh = 0, nm = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    while (fgets(line, sizeof(line), in)) {
+        char *p = line;
+        while (*p == ' ' || *p == '\t') p++;          /* skip indentation */
+
+        if (strncmp(p, "#include", 8) == 0) {
+            /* sscanf with scanset: read text between &lt; &gt; or " " */
+            if (sscanf(p, "#include &lt;%[^&gt;]&gt;", header) == 1 ||
+                sscanf(p, "#include \"%[^\"]\"", header) == 1) {
+                fprintf(out, "HEADER FILE : %s\n", header);
+                nh++;
+            }
+        }
+        else if (strncmp(p, "#define", 7) == 0) {
+            value[0] = '\0';
+            sscanf(p, "#define %s %[^\n]", name, value);
+            fprintf(out, "MACRO       : %-10s = %s\n", name, value);
+            nm++;
+        }
+    }
+    fprintf(out, "\nHeader files = %d, Macros = %d\n", nh, nm);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q12_preprocessor.c -o q12</pre>
+  <pre>./q12</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">HEADER FILE : stdio.h
+MACRO       : MAX        = 10
+
+Header files = 1, Macros = 1</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q13 – Find all function names in input.c and say whether each is a definition or a call.</h2>
+  <h3>Code – q13_functions.c</h3>
+  <pre>/* Q13. Find all function names in input.c.
+        A function = identifier followed by '(' that is NOT a keyword
+        (so for(, if(, while( are not functions).
+        If the word before it is a data type -&gt; DEFINITION, else CALL.  */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};
+
+int isKeyword(char *w)
+{
+    for (int i = 0; i &lt; 32; i++) if (strcmp(w, keywords[i]) == 0) return 1;
+    return 0;
+}
+int isType(char *w)
+{
+    return !strcmp(w,"int") || !strcmp(w,"void") || !strcmp(w,"float") ||
+           !strcmp(w,"char") || !strcmp(w,"double") || !strcmp(w,"long");
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], word[100], prev[100] = "";
+    int n = 0, ch, i = 0, k, j, line = 1;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (s[i] == '#')  { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '"')  { i++; while (s[i] &amp;&amp; s[i] != '"') { if (s[i]=='\\') i++; i++; } i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {
+            i += 2;
+            while (s[i] &amp;&amp; !(s[i]=='*' &amp;&amp; s[i+1]=='/')) { if (s[i]=='\n') line++; i++; }
+            i += 2; continue;
+        }
+        if (isalpha(s[i]) || s[i] == '_') {
+            k = 0;
+            while (isalnum(s[i]) || s[i] == '_') word[k++] = s[i++];
+            word[k] = '\0';
+            j = i;
+            while (s[j] == ' ' || s[j] == '\t') j++;          /* name  ( */
+            if (s[j] == '(' &amp;&amp; !isKeyword(word))
+                fprintf(out, "Line %-3d %-10s %s\n", line, word,
+                        isType(prev) ? "FUNCTION DEFINITION" : "FUNCTION CALL");
+            strcpy(prev, word);
+            continue;
+        }
+        if (!isspace(s[i])) prev[0] = '\0';     /* any symbol resets prev word */
+        i++;
+    }
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q13_functions.c -o q13</pre>
+  <pre>./q13</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Line 6   main       FUNCTION DEFINITION
+Line 20  printf     FUNCTION CALL
+Line 21  printf     FUNCTION CALL
+Line 26  printf     FUNCTION CALL</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q14 – Build a SYMBOL TABLE (name, type, kind, line) from the declarations in input.c.  ★</h2>
+  <h3>Code – q14_symbol_table.c</h3>
+  <pre>/* Q14. Build a SYMBOL TABLE from input.c.
+        For every declaration like   int i, j, n = 5;   float avg;
+        char name[20];  int main()   store NAME, TYPE, KIND, LINE.     */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+struct Symbol {
+    char name[50];
+    char type[20];
+    char kind[20];        /* variable / array / function */
+    int  line;
+} table[200];
+int count = 0;
+
+int isType(char *w)
+{
+    return !strcmp(w,"int") || !strcmp(w,"float") || !strcmp(w,"char") ||
+           !strcmp(w,"double") || !strcmp(w,"long") || !strcmp(w,"void");
+}
+
+void add(char *name, char *type, char *kind, int line)
+{
+    for (int i = 0; i &lt; count; i++)           /* already present? */
+        if (strcmp(table[i].name, name) == 0) return;
+    strcpy(table[count].name, name);
+    strcpy(table[count].type, type);
+    strcpy(table[count].kind, kind);
+    table[count].line = line;
+    count++;
+}
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], word[100], type[20];
+    int n = 0, ch, i = 0, k, line = 1;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (s[i] == '#' || (s[i] == '/' &amp;&amp; s[i+1] == '/')) { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {
+            i += 2; while (s[i] &amp;&amp; !(s[i]=='*' &amp;&amp; s[i+1]=='/')) { if (s[i]=='\n') line++; i++; }
+            i += 2; continue;
+        }
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') i++; i++; continue; }
+
+        if (isalpha(s[i]) || s[i] == '_') {
+            k = 0;
+            while (isalnum(s[i]) || s[i] == '_') word[k++] = s[i++];
+            word[k] = '\0';
+
+            if (isType(word)) {                    /* declaration starts */
+                strcpy(type, word);
+                while (1) {
+                    while (isspace(s[i])) { if (s[i]=='\n') line++; i++; }
+                    if (s[i] == '*') i++;          /* pointer: int *p   */
+                    while (isspace(s[i])) i++;
+                    k = 0;
+                    while (isalnum(s[i]) || s[i] == '_') word[k++] = s[i++];
+                    word[k] = '\0';
+                    if (k == 0) break;
+                    while (s[i] == ' ') i++;
+
+                    if (s[i] == '(') { add(word, type, "function", line); break; }
+                    if (s[i] == '[') add(word, type, "array", line);
+                    else             add(word, type, "variable", line);
+
+                    /* skip initialiser / array size up to , or ; */
+                    while (s[i] &amp;&amp; s[i] != ',' &amp;&amp; s[i] != ';') {
+                        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') i++; }
+                        i++;
+                    }
+                    if (s[i] == ',') { i++; continue; }   /* next name */
+                    break;                                /* reached ; */
+                }
+            }
+            continue;
+        }
+        i++;
+    }
+
+    fprintf(out, "%-4s %-10s %-8s %-10s %s\n", "No", "NAME", "TYPE", "KIND", "LINE");
+    fprintf(out, "------------------------------------------\n");
+    for (i = 0; i &lt; count; i++)
+        fprintf(out, "%-4d %-10s %-8s %-10s %d\n", i + 1, table[i].name,
+                table[i].type, table[i].kind, table[i].line);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q14_symbol_table.c -o q14</pre>
+  <pre>./q14</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">No   NAME       TYPE     KIND       LINE
+------------------------------------------
+1    main       int      function   6
+2    i          int      variable   8
+3    j          int      variable   8
+4    n          int      variable   8
+5    sum        int      variable   8
+6    avg        float    variable   9
+7    name       char     array      10</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q15 – words.txt has one word per line. Check whether each word is a valid C identifier and give the reason if it is not.  ★</h2>
+  <h3>Code – q15_valid_identifier.c</h3>
+  <pre>/* Q15. words.txt has one word per line. For each word decide whether it is
+        a VALID C identifier. Rules:
+          1. first char must be a letter or _
+          2. other chars must be letters, digits or _
+          3. it must not be a keyword                       -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};
+
+int main()
+{
+    FILE *in = fopen("words.txt", "r");
+    FILE *out = fopen("output.txt", "w");
+    char w[100];
+    int i, ok;
+
+    if (in == NULL) { printf("Cannot open words.txt\n"); return 1; }
+
+    while (fscanf(in, "%s", w) == 1) {             /* reads word by word */
+        char *reason = "";
+        ok = 1;
+        if (!(isalpha(w[0]) || w[0] == '_')) { ok = 0; reason = "starts with invalid char"; }
+        for (i = 1; ok &amp;&amp; w[i]; i++)
+            if (!(isalnum(w[i]) || w[i] == '_')) { ok = 0; reason = "contains invalid char"; }
+        for (i = 0; ok &amp;&amp; i &lt; 32; i++)
+            if (strcmp(w, keywords[i]) == 0) { ok = 0; reason = "is a keyword"; }
+
+        if (ok) fprintf(out, "%-12s VALID identifier\n", w);
+        else    fprintf(out, "%-12s INVALID (%s)\n", w, reason);
+    }
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q15_valid_identifier.c -o q15</pre>
+  <pre>cat words.txt</pre>
+  <pre class="out">sum
+_count
+2value
+total_marks
+float
+my-var
+a1b2
+for
+x$y
+Average</pre>
+  <pre>./q15</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">sum          VALID identifier
+_count       VALID identifier
+2value       INVALID (starts with invalid char)
+total_marks  VALID identifier
+float        INVALID (is a keyword)
+my-var       INVALID (contains invalid char)
+a1b2         VALID identifier
+for          INVALID (is a keyword)
+x$y          INVALID (contains invalid char)
+Average      VALID identifier</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q16 – Find all numeric constants in input.c and classify each as an integer or real constant.</h2>
+  <h3>Code – q16_constants.c</h3>
+  <pre>/* Q16. Find all numeric constants in input.c and classify each as
+        INTEGER or REAL (floating point). Numbers that are part of an
+        identifier (like a1) or inside strings are ignored.  -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], num[50];
+    int n = 0, ch, i = 0, k, line = 1, dots, ni = 0, nr = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') { if (s[i]=='\\') i++; i++; } i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (isalpha(s[i]) || s[i] == '_') {               /* skip identifiers */
+            while (isalnum(s[i]) || s[i] == '_') i++;
+            continue;
+        }
+        if (isdigit(s[i])) {
+            k = 0; dots = 0;
+            while (isdigit(s[i]) || s[i] == '.') {
+                if (s[i] == '.') dots++;
+                num[k++] = s[i++];
+            }
+            num[k] = '\0';
+            if (dots == 0)      { fprintf(out, "Line %-3d %-8s INTEGER CONSTANT\n", line, num); ni++; }
+            else if (dots == 1) { fprintf(out, "Line %-3d %-8s REAL CONSTANT\n", line, num); nr++; }
+            else                  fprintf(out, "Line %-3d %-8s INVALID NUMBER\n", line, num);
+            continue;
+        }
+        i++;
+    }
+    fprintf(out, "\nIntegers = %d, Reals = %d\n", ni, nr);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q16_constants.c -o q16</pre>
+  <pre>./q16</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Line 2   10       INTEGER CONSTANT
+Line 8   5        INTEGER CONSTANT
+Line 8   0        INTEGER CONSTANT
+Line 9   0.0      REAL CONSTANT
+Line 10  20       INTEGER CONSTANT
+Line 13  0        INTEGER CONSTANT
+Line 18  1        INTEGER CONSTANT
+Line 18  2        INTEGER CONSTANT
+Line 19  0        INTEGER CONSTANT
+Line 19  3        INTEGER CONSTANT
+Line 24  2.5      REAL CONSTANT
+Line 25  1.5      REAL CONSTANT
+Line 25  0        INTEGER CONSTANT
+Line 27  0        INTEGER CONSTANT
+
+Integers = 11, Reals = 3</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q17 – Count the for/while/do/if/else/switch statements in input.c and show the line number of each.</h2>
+  <h3>Code – q17_control_stmts.c</h3>
+  <pre>/* Q17. Count the loops and conditional statements (for, while, do, if,
+        else, switch) in input.c and print the line number of each.
+        Keywords inside strings/comments are ignored.       -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+char *ctrl[] = {"for", "while", "do", "if", "else", "switch"};
+int cnt[6];
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], word[100];
+    int n = 0, ch, i = 0, k, j, line = 1;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') { if (s[i]=='\\') i++; i++; } i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {
+            i += 2; while (s[i] &amp;&amp; !(s[i]=='*' &amp;&amp; s[i+1]=='/')) { if (s[i]=='\n') line++; i++; }
+            i += 2; continue;
+        }
+        if (isalpha(s[i]) || s[i] == '_') {
+            k = 0;
+            while (isalnum(s[i]) || s[i] == '_') word[k++] = s[i++];
+            word[k] = '\0';
+            for (j = 0; j &lt; 6; j++)
+                if (strcmp(word, ctrl[j]) == 0) {
+                    cnt[j]++;
+                    fprintf(out, "Line %-3d : %s\n", line, word);
+                }
+            continue;
+        }
+        i++;
+    }
+    fprintf(out, "\nSUMMARY\n");
+    for (j = 0; j &lt; 6; j++) fprintf(out, "%-7s = %d\n", ctrl[j], cnt[j]);
+    fprintf(out, "Total loops = %d\n", cnt[0] + cnt[1] + cnt[2]);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q17_control_stmts.c -o q17</pre>
+  <pre>./q17</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Line 13  : for
+Line 18  : for
+Line 19  : for
+Line 25  : if
+
+SUMMARY
+for     = 3
+while   = 0
+do      = 0
+if      = 1
+else    = 0
+switch  = 0
+Total loops = 3</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q18 – Find all operators in input.c and classify them (arithmetic, relational, logical, assignment, inc/dec, bitwise).</h2>
+  <h3>Code – q18_operators.c</h3>
+  <pre>/* Q18. Find every operator in input.c and classify it as
+        ARITHMETIC, RELATIONAL, LOGICAL, ASSIGNMENT, INCREMENT/DECREMENT
+        or BITWISE. Strings, comments and #lines are skipped. -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char s[20000], op[3];
+    int n = 0, ch, i = 0, line = 1;
+    int a = 0, r = 0, l = 0, as = 0, id = 0, b = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (s[i] == '#') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '"') { i++; while (s[i] &amp;&amp; s[i] != '"') { if (s[i]=='\\') i++; i++; } i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '/') { while (s[i] &amp;&amp; s[i] != '\n') i++; continue; }
+        if (s[i] == '/' &amp;&amp; s[i+1] == '*') {
+            i += 2; while (s[i] &amp;&amp; !(s[i]=='*' &amp;&amp; s[i+1]=='/')) { if (s[i]=='\n') line++; i++; }
+            i += 2; continue;
+        }
+        if (strchr("+-*/%=&lt;&gt;!&amp;|^~", s[i])) {
+            op[0] = s[i]; op[1] = s[i+1]; op[2] = '\0';      /* try 2 chars */
+            char *type = NULL;
+
+            if (!strcmp(op,"++") || !strcmp(op,"--"))                      { type = "INCREMENT/DECREMENT"; id++; }
+            else if (!strcmp(op,"==") || !strcmp(op,"!=") ||
+                     !strcmp(op,"&lt;=") || !strcmp(op,"&gt;="))                 { type = "RELATIONAL"; r++; }
+            else if (!strcmp(op,"&amp;&amp;") || !strcmp(op,"||"))                 { type = "LOGICAL"; l++; }
+            else if (op[1] == '=' &amp;&amp; strchr("+-*/%", op[0]))               { type = "ASSIGNMENT (compound)"; as++; }
+
+            if (type) i += 2;                                 /* 2-char op */
+            else {
+                op[1] = '\0';                                 /* 1-char op */
+                if (strchr("+-*/%", op[0]))      { type = "ARITHMETIC"; a++; }
+                else if (strchr("&lt;&gt;", op[0]))    { type = "RELATIONAL"; r++; }
+                else if (op[0] == '!')           { type = "LOGICAL"; l++; }
+                else if (op[0] == '=')           { type = "ASSIGNMENT"; as++; }
+                else                             { type = "BITWISE"; b++; }
+                i++;
+            }
+            fprintf(out, "Line %-3d %-3s %s\n", line, op, type);
+            continue;
+        }
+        i++;
+    }
+    fprintf(out, "\nArithmetic=%d Relational=%d Logical=%d Assignment=%d Inc/Dec=%d Bitwise=%d\n",
+            a, r, l, as, id, b);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q18_operators.c -o q18</pre>
+  <pre>./q18</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Line 8   =   ASSIGNMENT
+Line 8   =   ASSIGNMENT
+Line 9   =   ASSIGNMENT
+Line 10  =   ASSIGNMENT
+Line 13  =   ASSIGNMENT
+Line 13  &lt;   RELATIONAL
+Line 13  ++  INCREMENT/DECREMENT
+Line 15  =   ASSIGNMENT
+Line 15  +   ARITHMETIC
+Line 18  =   ASSIGNMENT
+Line 18  &lt;=  RELATIONAL
+Line 18  +=  ASSIGNMENT (compound)
+Line 19  =   ASSIGNMENT
+Line 19  &lt;   RELATIONAL
+Line 19  &amp;&amp;  LOGICAL
+Line 19  !=  RELATIONAL
+Line 19  ++  INCREMENT/DECREMENT
+Line 20  *   ARITHMETIC
+Line 24  =   ASSIGNMENT
+Line 24  /   ARITHMETIC
+Line 25  &gt;=  RELATIONAL
+Line 25  &amp;&amp;  LOGICAL
+Line 25  !=  RELATIONAL
+
+Arithmetic=3 Relational=6 Logical=2 Assignment=10 Inc/Dec=2 Bitwise=0</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q19 – Replace an identifier (whole word only) with another word throughout input.c, without changing the text inside strings.</h2>
+  <h3>Code – q19_replace_word.c</h3>
+  <pre>/* Q19. Replace every occurrence of an identifier (whole word only) in
+        input.c with a new name and write the program to output.txt.
+        e.g. replace  sum -&gt; total   (but "summary" is NOT changed,
+        and text inside strings is NOT changed)                         */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char oldw[50], neww[50], word[100];
+    int ch, k, count = 0;
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+    printf("Enter word to replace : ");
+    scanf("%s", oldw);
+    printf("Enter new word        : ");
+    scanf("%s", neww);
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (ch == '"') {                               /* copy string as is */
+            fputc(ch, out);
+            while ((ch = fgetc(in)) != EOF &amp;&amp; ch != '"') {
+                fputc(ch, out);
+                if (ch == '\\') fputc(fgetc(in), out);
+            }
+            fputc('"', out);
+        }
+        else if (isalpha(ch) || ch == '_') {           /* collect a word */
+            k = 0;
+            while (ch != EOF &amp;&amp; (isalnum(ch) || ch == '_')) { word[k++] = ch; ch = fgetc(in); }
+            word[k] = '\0';
+            if (ch != EOF) ungetc(ch, in);
+
+            if (strcmp(word, oldw) == 0) { fputs(neww, out); count++; }
+            else fputs(word, out);
+        }
+        else fputc(ch, out);
+    }
+    printf("%d replacement(s) done. See output.txt\n", count);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q19_replace_word.c -o q19</pre>
+  <pre>./q19</pre>
+  <pre class="out">Enter word to replace : sum
+Enter new word        : total
+8 replacement(s) done. See output.txt</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+
+/* Program: total and
+   pattern printing */
+int main()
+{
+    int i, j, n = 5, total = 0;
+    float avg = 0.0;
+    char name[20] = "for loop demo";
+
+    // first loop: simple total
+    for(i = 0; i &lt; n; i++)
+    {
+        total = total + i;
+    }
+
+    for (i = 1; i &lt;= MAX; i += 2) {
+        for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+            printf("%d ", i * j);
+        printf("\n");
+    }
+
+    avg = total / 2.5;
+    if (avg &gt;= 1.5 &amp;&amp; total != 0)
+        printf("Sum = %d, Avg = %f\n", total, avg);
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q20 – Count vowels, consonants, digits, spaces and special characters in a text file.</h2>
+  <h3>Code – q20_char_types.c</h3>
+  <pre>/* Q20. Count vowels, consonants, digits, spaces and special characters
+        in text.txt and write the counts to output.txt                   */
+#include &lt;stdio.h&gt;
+#include &lt;ctype.h&gt;
+
+int main()
+{
+    FILE *in = fopen("text.txt", "r");
+    FILE *out = fopen("output.txt", "w");
+    int ch, v = 0, c = 0, d = 0, sp = 0, sc = 0, lines = 0;
+
+    if (in == NULL) { printf("Cannot open text.txt\n"); return 1; }
+
+    while ((ch = fgetc(in)) != EOF) {
+        if (isalpha(ch)) {
+            char low = tolower(ch);
+            if (low=='a' || low=='e' || low=='i' || low=='o' || low=='u') v++;
+            else c++;
+        }
+        else if (isdigit(ch)) d++;
+        else if (ch == ' ' || ch == '\t') sp++;
+        else if (ch == '\n') lines++;
+        else sc++;                                /* , . ! @ # etc. */
+    }
+    fprintf(out, "Vowels       : %d\n", v);
+    fprintf(out, "Consonants   : %d\n", c);
+    fprintf(out, "Digits       : %d\n", d);
+    fprintf(out, "Spaces       : %d\n", sp);
+    fprintf(out, "Special chars: %d\n", sc);
+    fprintf(out, "Lines        : %d\n", lines);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q20_char_types.c -o q20</pre>
+  <pre>cat text.txt</pre>
+  <pre class="out">Madam Anna saw a level racecar.
+Compiler Design lab 2026!
+Hello World, refer to noon notes.</pre>
+  <pre>./q20</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Vowels       : 27
+Consonants   : 41
+Digits       : 4
+Spaces       : 13
+Special chars: 4
+Lines        : 3</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q21 – Without string.h: for each line of a file, print the line reversed, each word reversed and the line in upper case.</h2>
+  <h3>Code – q21_reverse.c</h3>
+  <pre>/* Q21. String handling WITHOUT string.h:
+        For every line of text.txt write to output.txt
+          (a) the whole line reversed
+          (b) every word reversed in its place
+          (c) the line in UPPER CASE                                    */
+#include &lt;stdio.h&gt;
+
+int length(char *s)                         /* own strlen */
+{
+    int n = 0;
+    while (s[n] != '\0') n++;
+    return n;
+}
+
+void reverseRange(char *s, int i, int j)    /* reverse s[i..j] in place */
+{
+    char t;
+    while (i &lt; j) { t = s[i]; s[i] = s[j]; s[j] = t; i++; j--; }
+}
+
+int main()
+{
+    FILE *in = fopen("text.txt", "r");
+    FILE *out = fopen("output.txt", "w");
+    char line[300], copy[300];
+    int i, n, start;
+
+    if (in == NULL) { printf("Cannot open text.txt\n"); return 1; }
+
+    while (fgets(line, sizeof(line), in)) {
+        n = length(line);
+        if (n &gt; 0 &amp;&amp; line[n-1] == '\n') line[--n] = '\0';   /* drop \n */
+        fprintf(out, "Original      : %s\n", line);
+
+        for (i = 0; i &lt;= n; i++) copy[i] = line[i];        /* own strcpy */
+        reverseRange(copy, 0, n - 1);
+        fprintf(out, "Line reversed : %s\n", copy);
+
+        for (i = 0; i &lt;= n; i++) copy[i] = line[i];
+        start = 0;
+        for (i = 0; i &lt;= n; i++)
+            if (copy[i] == ' ' || copy[i] == '\0') {        /* word ends */
+                reverseRange(copy, start, i - 1);
+                start = i + 1;
+            }
+        fprintf(out, "Words reversed: %s\n", copy);
+
+        for (i = 0; i &lt;= n; i++)                            /* own toupper */
+            copy[i] = (line[i] &gt;= 'a' &amp;&amp; line[i] &lt;= 'z') ? line[i] - 32 : line[i];
+        fprintf(out, "Upper case    : %s\n\n", copy);
+    }
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q21_reverse.c -o q21</pre>
+  <pre>cat text.txt</pre>
+  <pre class="out">Madam Anna saw a level racecar.
+Compiler Design lab 2026!
+Hello World, refer to noon notes.</pre>
+  <pre>./q21</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Original      : Madam Anna saw a level racecar.
+Line reversed : .racecar level a was annA madaM
+Words reversed: madaM annA was a level .racecar
+Upper case    : MADAM ANNA SAW A LEVEL RACECAR.
+
+Original      : Compiler Design lab 2026!
+Line reversed : !6202 bal ngiseD relipmoC
+Words reversed: relipmoC ngiseD bal !6202
+Upper case    : COMPILER DESIGN LAB 2026!
+
+Original      : Hello World, refer to noon notes.
+Line reversed : .seton noon ot refer ,dlroW olleH
+Words reversed: olleH ,dlroW refer ot noon .seton
+Upper case    : HELLO WORLD, REFER TO NOON NOTES.</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q22 – Print every palindrome word in a text file (ignore case and punctuation), plus the longest word.</h2>
+  <h3>Code – q22_palindrome_words.c</h3>
+  <pre>/* Q22. Read text.txt word by word, remove punctuation, and print every
+        word that is a PALINDROME (case-insensitive) to output.txt.
+        Also print the total word count and the longest word.           */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int isPalindrome(char *w)
+{
+    int i = 0, j = strlen(w) - 1;
+    while (i &lt; j) {
+        if (tolower(w[i]) != tolower(w[j])) return 0;
+        i++; j--;
+    }
+    return 1;
+}
+
+int main()
+{
+    FILE *in = fopen("text.txt", "r");
+    FILE *out = fopen("output.txt", "w");
+    char raw[100], w[100], longest[100] = "";
+    int i, k, total = 0, pal = 0;
+
+    if (in == NULL) { printf("Cannot open text.txt\n"); return 1; }
+
+    while (fscanf(in, "%s", raw) == 1) {
+        k = 0;
+        for (i = 0; raw[i]; i++)                 /* keep only letters/digits */
+            if (isalnum(raw[i])) w[k++] = raw[i];
+        w[k] = '\0';
+        if (k == 0) continue;
+        total++;
+
+        if (strlen(w) &gt; strlen(longest)) strcpy(longest, w);
+        if (k &gt; 1 &amp;&amp; isPalindrome(w)) {
+            fprintf(out, "Palindrome : %s\n", w);
+            pal++;
+        }
+    }
+    fprintf(out, "\nTotal words = %d, Palindromes = %d\n", total, pal);
+    fprintf(out, "Longest word = %s (%d letters)\n", longest, (int)strlen(longest));
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q22_palindrome_words.c -o q22</pre>
+  <pre>cat text.txt</pre>
+  <pre class="out">Madam Anna saw a level racecar.
+Compiler Design lab 2026!
+Hello World, refer to noon notes.</pre>
+  <pre>./q22</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Palindrome : Madam
+Palindrome : Anna
+Palindrome : level
+Palindrome : racecar
+Palindrome : refer
+Palindrome : noon
+
+Total words = 16, Palindromes = 6
+Longest word = Compiler (8 letters)</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Q23 – Count total, blank, comment, preprocessor and code lines in a C program.</h2>
+  <h3>Code – q23_loc.c</h3>
+  <pre>/* Q23. Count LINES OF CODE in input.c:
+          blank lines, comment lines, preprocessor lines and code lines.
+        (A line that is only a comment, or inside a block comment,
+         counts as a comment line.)                         -&gt; output.txt */
+#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r");
+    FILE *out = fopen("output.txt", "w");
+    char line[500];
+    int blank = 0, comment = 0, pre = 0, code = 0, total = 0;
+    int inBlock = 0;                          /* inside a block comment? */
+
+    if (in == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    while (fgets(line, sizeof(line), in)) {
+        char *p = line;
+        total++;
+        while (*p == ' ' || *p == '\t') p++;  /* skip leading spaces */
+
+        if (inBlock) {
+            comment++;
+            if (strstr(p, "*/")) inBlock = 0;
+        }
+        else if (*p == '\n' || *p == '\0') blank++;
+        else if (strncmp(p, "//", 2) == 0) comment++;
+        else if (strncmp(p, "/*", 2) == 0) {
+            comment++;
+            if (strstr(p + 2, "*/") == NULL) inBlock = 1;   /* continues */
+        }
+        else if (*p == '#') pre++;
+        else code++;
+    }
+    fprintf(out, "Total lines        : %d\n", total);
+    fprintf(out, "Blank lines        : %d\n", blank);
+    fprintf(out, "Comment lines      : %d\n", comment);
+    fprintf(out, "Preprocessor lines : %d\n", pre);
+    fprintf(out, "Code lines         : %d\n", code);
+    fclose(in);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>gcc q23_loc.c -o q23</pre>
+  <pre>./q23</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Total lines        : 28
+Blank lines        : 4
+Comment lines      : 3
+Preprocessor lines : 2
+Code lines         : 19</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Part B – LEX Programs</h2>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L1 – LEX: count the lines, words and characters of input.c.</h2>
+  <h3>Code – l01_count.l</h3>
+  <pre>/* L1. Count number of lines, words and characters in input.c
+       (reads the file using yyin, writes result to output.txt) */
+%{
+#include &lt;stdio.h&gt;
+int lines = 0, words = 0, chars = 0;
+%}
+
+%%
+\n          { lines++; chars++; }
+[^ \t\n]+   { words++; chars += yyleng; }   /* yyleng = length of yytext */
+.           { chars++; }                    /* space or tab */
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin = fopen("input.c", "r");
+    if (yyin == NULL) { printf("Cannot open input.c\n"); return 1; }
+    FILE *out = fopen("output.txt", "w");
+
+    yylex();
+
+    fprintf(out, "Lines      = %d\n", lines);
+    fprintf(out, "Words      = %d\n", words);
+    fprintf(out, "Characters = %d\n", chars);
+    fclose(out);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l01_count.l</pre>
+  <pre>gcc lex.yy.c -o l01</pre>
+  <pre>./l01</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">Lines      = 28
+Words      = 106
+Characters = 532</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L2 – LEX: lexical analyzer. Identify keywords, identifiers, constants, strings, operators and symbols in input.c and write them to output.txt.  ★</h2>
+  <h3>Code – l02_tokens.l</h3>
+  <pre>/* L2. LEXICAL ANALYZER using LEX.
+       Identify keywords, identifiers, constants, strings, operators and
+       special symbols in input.c. Comments are skipped.
+       Output (with line numbers) goes to output.txt through yyout.     */
+%{
+#include &lt;stdio.h&gt;
+int line = 1, ntok = 0;
+%}
+
+DIGIT     [0-9]
+LETTER    [a-zA-Z_]
+ID        {LETTER}({LETTER}|{DIGIT})*
+
+%%
+"/*"([^*]|\*+[^*/])*\*+"/"   { for (int i = 0; i &lt; yyleng; i++) if (yytext[i] == '\n') line++; }
+"//".*                       ;   /* single line comment: ignore */
+"#".*                        { fprintf(yyout, "%-5d%-22s PREPROCESSOR DIRECTIVE\n", line, yytext); }
+
+auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|for|goto|if|int|long|register|return|short|signed|sizeof|static|struct|switch|typedef|union|unsigned|void|volatile|while   { fprintf(yyout, "%-5d%-22s KEYWORD\n", line, yytext); ntok++; }
+
+{ID}                     { fprintf(yyout, "%-5d%-22s IDENTIFIER\n", line, yytext); ntok++; }
+{DIGIT}+"."{DIGIT}+      { fprintf(yyout, "%-5d%-22s REAL CONSTANT\n", line, yytext); ntok++; }
+{DIGIT}+                 { fprintf(yyout, "%-5d%-22s INTEGER CONSTANT\n", line, yytext); ntok++; }
+\"(\\.|[^"\\])*\"        { fprintf(yyout, "%-5d%-22s STRING LITERAL\n", line, yytext); ntok++; }
+\'(\\.|[^'\\])\'         { fprintf(yyout, "%-5d%-22s CHARACTER CONSTANT\n", line, yytext); ntok++; }
+
+"++"|"--"                { fprintf(yyout, "%-5d%-22s INC/DEC OPERATOR\n", line, yytext); ntok++; }
+"&lt;="|"&gt;="|"=="|"!="|"&lt;"|"&gt;"   { fprintf(yyout, "%-5d%-22s RELATIONAL OPERATOR\n", line, yytext); ntok++; }
+"&amp;&amp;"|"||"|"!"            { fprintf(yyout, "%-5d%-22s LOGICAL OPERATOR\n", line, yytext); ntok++; }
+"="|"+="|"-="|"*="|"/="  { fprintf(yyout, "%-5d%-22s ASSIGNMENT OPERATOR\n", line, yytext); ntok++; }
+"+"|"-"|"*"|"/"|"%"      { fprintf(yyout, "%-5d%-22s ARITHMETIC OPERATOR\n", line, yytext); ntok++; }
+[(){}\[\];,]             { fprintf(yyout, "%-5d%-22s SPECIAL SYMBOL\n", line, yytext); ntok++; }
+
+\n                       { line++; }
+[ \t]+                   ;   /* ignore white space */
+.                        { fprintf(yyout, "%-5d%-22s UNKNOWN\n", line, yytext); }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("input.c", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open input.c\n"); return 1; }
+
+    fprintf(yyout, "%-5s%-22s %s\n", "LINE", "LEXEME", "TOKEN");
+    yylex();
+    fprintf(yyout, "\nTotal tokens = %d\n", ntok);
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l02_tokens.l</pre>
+  <pre>gcc lex.yy.c -o l02</pre>
+  <pre>./l02</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">LINE LEXEME                 TOKEN
+1    #include &lt;stdio.h&gt;     PREPROCESSOR DIRECTIVE
+2    #define MAX 10         PREPROCESSOR DIRECTIVE
+6    int                    KEYWORD
+6    main                   IDENTIFIER
+6    (                      SPECIAL SYMBOL
+6    )                      SPECIAL SYMBOL
+7    {                      SPECIAL SYMBOL
+8    int                    KEYWORD
+8    i                      IDENTIFIER
+8    ,                      SPECIAL SYMBOL
+8    j                      IDENTIFIER
+8    ,                      SPECIAL SYMBOL
+8    n                      IDENTIFIER
+8    =                      ASSIGNMENT OPERATOR
+8    5                      INTEGER CONSTANT
+8    ,                      SPECIAL SYMBOL
+8    sum                    IDENTIFIER
+8    =                      ASSIGNMENT OPERATOR
+8    0                      INTEGER CONSTANT
+8    ;                      SPECIAL SYMBOL
+9    float                  KEYWORD
+9    avg                    IDENTIFIER
+9    =                      ASSIGNMENT OPERATOR
+9    0.0                    REAL CONSTANT
+9    ;                      SPECIAL SYMBOL
+10   char                   KEYWORD
+10   name                   IDENTIFIER
+10   [                      SPECIAL SYMBOL
+10   20                     INTEGER CONSTANT
+10   ]                      SPECIAL SYMBOL
+10   =                      ASSIGNMENT OPERATOR
+10   "for loop demo"        STRING LITERAL
+10   ;                      SPECIAL SYMBOL
+13   for                    KEYWORD
+13   (                      SPECIAL SYMBOL
+13   i                      IDENTIFIER
+13   =                      ASSIGNMENT OPERATOR
+13   0                      INTEGER CONSTANT
+13   ;                      SPECIAL SYMBOL
+13   i                      IDENTIFIER
+13   &lt;                      RELATIONAL OPERATOR
+13   n                      IDENTIFIER
+13   ;                      SPECIAL SYMBOL
+13   i                      IDENTIFIER
+13   ++                     INC/DEC OPERATOR
+13   )                      SPECIAL SYMBOL
+14   {                      SPECIAL SYMBOL
+15   sum                    IDENTIFIER
+15   =                      ASSIGNMENT OPERATOR
+15   sum                    IDENTIFIER
+15   +                      ARITHMETIC OPERATOR
+15   i                      IDENTIFIER
+15   ;                      SPECIAL SYMBOL
+16   }                      SPECIAL SYMBOL
+18   for                    KEYWORD
+18   (                      SPECIAL SYMBOL
+18   i                      IDENTIFIER
+18   =                      ASSIGNMENT OPERATOR
+18   1                      INTEGER CONSTANT
+18   ;                      SPECIAL SYMBOL
+18   i                      IDENTIFIER
+18   &lt;=                     RELATIONAL OPERATOR
+18   MAX                    IDENTIFIER
+18   ;                      SPECIAL SYMBOL
+18   i                      IDENTIFIER
+18   +=                     ASSIGNMENT OPERATOR
+18   2                      INTEGER CONSTANT
+18   )                      SPECIAL SYMBOL
+18   {                      SPECIAL SYMBOL
+19   for                    KEYWORD
+19   (                      SPECIAL SYMBOL
+19   j                      IDENTIFIER
+19   =                      ASSIGNMENT OPERATOR
+19   0                      INTEGER CONSTANT
+19   ;                      SPECIAL SYMBOL
+19   j                      IDENTIFIER
+19   &lt;                      RELATIONAL OPERATOR
+19   i                      IDENTIFIER
+19   &amp;&amp;                     LOGICAL OPERATOR
+19   j                      IDENTIFIER
+19   !=                     RELATIONAL OPERATOR
+19   3                      INTEGER CONSTANT
+19   ;                      SPECIAL SYMBOL
+19   j                      IDENTIFIER
+19   ++                     INC/DEC OPERATOR
+19   )                      SPECIAL SYMBOL
+20   printf                 IDENTIFIER
+20   (                      SPECIAL SYMBOL
+20   "%d "                  STRING LITERAL
+20   ,                      SPECIAL SYMBOL
+20   i                      IDENTIFIER
+20   *                      ARITHMETIC OPERATOR
+20   j                      IDENTIFIER
+20   )                      SPECIAL SYMBOL
+20   ;                      SPECIAL SYMBOL
+21   printf                 IDENTIFIER
+21   (                      SPECIAL SYMBOL
+21   "\n"                   STRING LITERAL
+21   )                      SPECIAL SYMBOL
+21   ;                      SPECIAL SYMBOL
+22   }                      SPECIAL SYMBOL
+24   avg                    IDENTIFIER
+24   =                      ASSIGNMENT OPERATOR
+24   sum                    IDENTIFIER
+24   /                      ARITHMETIC OPERATOR
+24   2.5                    REAL CONSTANT
+24   ;                      SPECIAL SYMBOL
+25   if                     KEYWORD
+25   (                      SPECIAL SYMBOL
+25   avg                    IDENTIFIER
+25   &gt;=                     RELATIONAL OPERATOR
+25   1.5                    REAL CONSTANT
+25   &amp;&amp;                     LOGICAL OPERATOR
+25   sum                    IDENTIFIER
+25   !=                     RELATIONAL OPERATOR
+25   0                      INTEGER CONSTANT
+25   )                      SPECIAL SYMBOL
+26   printf                 IDENTIFIER
+26   (                      SPECIAL SYMBOL
+26   "Sum = %d, Avg = %f\n" STRING LITERAL
+26   ,                      SPECIAL SYMBOL
+26   sum                    IDENTIFIER
+26   ,                      SPECIAL SYMBOL
+26   avg                    IDENTIFIER
+26   )                      SPECIAL SYMBOL
+26   ;                      SPECIAL SYMBOL
+27   return                 KEYWORD
+27   0                      INTEGER CONSTANT
+27   ;                      SPECIAL SYMBOL
+28   }                      SPECIAL SYMBOL
+
+Total tokens = 128</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L3 – LEX: print all tokens between ( and ) of every for loop in input.c (using start conditions).  ★</h2>
+  <h3>Code – l03_for_tokens.l</h3>
+  <pre>/* L3. *** EXPECTED ***  LEX version of "tokens between ( and ) of a for loop".
+       Uses an EXCLUSIVE START CONDITION  %x FORH :
+         - when we see  for (   we BEGIN FORH
+         - inside FORH only the &lt;FORH&gt; rules are active
+         - on the matching ')'  we go back with BEGIN INITIAL
+       "for" inside strings / comments is ignored.          -&gt; output.txt */
+%{
+#include &lt;stdio.h&gt;
+int depth = 0, loop = 0, count = 0;
+void put(char *type) { fprintf(yyout, "   %-8s %s\n", yytext, type); count++; }
+%}
+
+%x FORH
+
+%%
+\"(\\.|[^"\\])*\"              ;   /* skip strings  */
+"//".*                         ;   /* skip comments */
+"/*"([^*]|\*+[^*/])*\*+"/"     ;
+
+"for"[ \t\n]*"("               { loop++; depth = 1; count = 0;
+                                 fprintf(yyout, "for loop %d - tokens between ( and ):\n", loop);
+                                 BEGIN FORH; }
+
+[a-zA-Z_][a-zA-Z0-9_]*         ;   /* other words: so 'format(' is not a for */
+.|\n                           ;   /* everything else outside loops: ignore */
+
+&lt;FORH&gt;"("                      { depth++; put("SPECIAL SYMBOL"); }
+&lt;FORH&gt;")"                      { depth--;
+                                 if (depth == 0) {          /* loop header ends */
+                                     fprintf(yyout, "   Total tokens = %d\n\n", count);
+                                     BEGIN INITIAL;
+                                 } else put("SPECIAL SYMBOL"); }
+&lt;FORH&gt;int|float|char|double    { put("KEYWORD"); }
+&lt;FORH&gt;[a-zA-Z_][a-zA-Z0-9_]*   { put("IDENTIFIER"); }
+&lt;FORH&gt;[0-9]+("."[0-9]+)?       { put("CONSTANT"); }
+&lt;FORH&gt;"++"|"--"|"&lt;="|"&gt;="|"=="|"!="|"&amp;&amp;"|"||"|"+="|"-="|"*="|"/="   { put("OPERATOR"); }
+&lt;FORH&gt;[-+*/%&lt;&gt;=!]              { put("OPERATOR"); }
+&lt;FORH&gt;[;,]                     { put("SEPARATOR"); }
+&lt;FORH&gt;[ \t\n]+                 ;
+&lt;FORH&gt;.                        { put("SPECIAL SYMBOL"); }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("input.c", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open input.c\n"); return 1; }
+    yylex();
+    if (loop == 0) fprintf(yyout, "No for loop found\n");
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l03_for_tokens.l</pre>
+  <pre>gcc lex.yy.c -o l03</pre>
+  <pre>./l03</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">for loop 1 - tokens between ( and ):
+   i        IDENTIFIER
+   =        OPERATOR
+   0        CONSTANT
+   ;        SEPARATOR
+   i        IDENTIFIER
+   &lt;        OPERATOR
+   n        IDENTIFIER
+   ;        SEPARATOR
+   i        IDENTIFIER
+   ++       OPERATOR
+   Total tokens = 10
+
+for loop 2 - tokens between ( and ):
+   i        IDENTIFIER
+   =        OPERATOR
+   1        CONSTANT
+   ;        SEPARATOR
+   i        IDENTIFIER
+   &lt;=       OPERATOR
+   MAX      IDENTIFIER
+   ;        SEPARATOR
+   i        IDENTIFIER
+   +=       OPERATOR
+   2        CONSTANT
+   Total tokens = 11
+
+for loop 3 - tokens between ( and ):
+   j        IDENTIFIER
+   =        OPERATOR
+   0        CONSTANT
+   ;        SEPARATOR
+   j        IDENTIFIER
+   &lt;        OPERATOR
+   i        IDENTIFIER
+   &amp;&amp;       OPERATOR
+   j        IDENTIFIER
+   !=       OPERATOR
+   3        CONSTANT
+   ;        SEPARATOR
+   j        IDENTIFIER
+   ++       OPERATOR
+   Total tokens = 14</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L4 – LEX: remove comments from input.c and write the program to output.txt. Count the comments.  ★</h2>
+  <h3>Code – l04_remove_comments.l</h3>
+  <pre>/* L4. Remove single-line and multi-line comments from input.c and write
+       the remaining program to output.txt. Count the comments removed.
+       ECHO = copy yytext to yyout unchanged.                            */
+%{
+#include &lt;stdio.h&gt;
+int nc = 0;
+%}
+
+%%
+\"(\\.|[^"\\])*\"              { ECHO; }      /* keep strings as they are */
+"//".*                         { nc++; }      /* drop single-line comment  */
+"/*"([^*]|\*+[^*/])*\*+"/"     { nc++; }      /* drop multi-line comment   */
+.|\n                           { ECHO; }      /* copy everything else      */
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("input.c", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open input.c\n"); return 1; }
+    yylex();
+    printf("Number of comments removed = %d\n", nc);
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l04_remove_comments.l</pre>
+  <pre>gcc lex.yy.c -o l04</pre>
+  <pre>./l04</pre>
+  <pre class="out">Number of comments removed = 2</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+#define MAX 10
+
+
+int main()
+{
+    int i, j, n = 5, sum = 0;
+    float avg = 0.0;
+    char name[20] = "for loop demo";
+
+    
+    for(i = 0; i &lt; n; i++)
+    {
+        sum = sum + i;
+    }
+
+    for (i = 1; i &lt;= MAX; i += 2) {
+        for(j = 0; j &lt; i &amp;&amp; j != 3; j++)
+            printf("%d ", i * j);
+        printf("\n");
+    }
+
+    avg = sum / 2.5;
+    if (avg &gt;= 1.5 &amp;&amp; sum != 0)
+        printf("Sum = %d, Avg = %f\n", sum, avg);
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L5 – LEX: count vowels and consonants in an input string.</h2>
+  <h3>Code – l05_vowels.l</h3>
+  <pre>/* L5. Count vowels and consonants in the input string
+       (type the text, press Enter, then Ctrl+D)           */
+%{
+#include &lt;stdio.h&gt;
+int v = 0, c = 0;
+%}
+
+%%
+[aeiouAEIOU]    { v++; }
+[a-zA-Z]        { c++; }       /* any other letter = consonant */
+.|\n            ;              /* ignore everything else       */
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    printf("Enter a string: ");
+    yylex();
+    printf("Vowels = %d\nConsonants = %d\n", v, c);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l05_vowels.l</pre>
+  <pre>gcc lex.yy.c -o l05</pre>
+  <pre>./l05</pre>
+  <pre class="out">Enter a string: Compiler Design Lab
+[Ctrl+D]
+Vowels = 6
+Consonants = 11</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L6 – LEX: count positive and negative integers and fractions.</h2>
+  <h3>Code – l06_numbers.l</h3>
+  <pre>/* L6. Count positive integers, negative integers, positive fractions
+       and negative fractions in the input.                              */
+%{
+#include &lt;stdio.h&gt;
+int pi = 0, ni = 0, pf = 0, nf = 0;
+%}
+
+%%
+"+"?[0-9]+                 { pi++; printf("%-8s positive integer\n", yytext); }
+"-"[0-9]+                  { ni++; printf("%-8s negative integer\n", yytext); }
+"+"?[0-9]*"."[0-9]+        { pf++; printf("%-8s positive fraction\n", yytext); }
+"-"[0-9]*"."[0-9]+         { nf++; printf("%-8s negative fraction\n", yytext); }
+"+"?[0-9]+"/"[0-9]+        { pf++; printf("%-8s positive fraction\n", yytext); }
+"-"[0-9]+"/"[0-9]+         { nf++; printf("%-8s negative fraction\n", yytext); }
+.|\n                       ;
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    printf("Enter numbers (Ctrl+D to end):\n");
+    yylex();
+    printf("\nPositive integers  = %d\nNegative integers  = %d\n", pi, ni);
+    printf("Positive fractions = %d\nNegative fractions = %d\n", pf, nf);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l06_numbers.l</pre>
+  <pre>gcc lex.yy.c -o l06</pre>
+  <pre>./l06</pre>
+  <pre class="out">Enter numbers (Ctrl+D to end):
+12 -7 +3 4.5 -0.25 3/4 -1/2 100
+[Ctrl+D]
+12       positive integer
+-7       negative integer
++3       positive integer
+4.5      positive fraction
+-0.25    negative fraction
+3/4      positive fraction
+-1/2     negative fraction
+100      positive integer
+
+Positive integers  = 3
+Negative integers  = 1
+Positive fractions = 2
+Negative fractions = 2</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L7 – LEX: count printf and scanf in prog.c and replace them with writef and readf.  ★</h2>
+  <h3>Code – l07_printf_scanf.l</h3>
+  <pre>/* L7. Count the number of printf and scanf statements in prog.c and
+       replace them with writef and readf respectively. Output: output.txt */
+%{
+#include &lt;stdio.h&gt;
+int np = 0, ns = 0;
+%}
+
+%%
+"printf"                  { np++; fprintf(yyout, "writef"); }
+"scanf"                   { ns++; fprintf(yyout, "readf"); }
+[a-zA-Z_][a-zA-Z0-9_]*    { ECHO; }   /* other words: myprintf stays same */
+.|\n                      { ECHO; }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("prog.c", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open prog.c\n"); return 1; }
+    yylex();
+    printf("printf count = %d\nscanf count  = %d\n", np, ns);
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l07_printf_scanf.l</pre>
+  <pre>gcc lex.yy.c -o l07</pre>
+  <pre>cat prog.c</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+int main()
+{
+    int a, b;
+    printf("Enter two numbers: ");
+    scanf("%d %d", &amp;a, &amp;b);
+    printf("Sum = %d\n", a + b);
+    myprintf_count = 0;
+    return 0;
+}</pre>
+  <pre>./l07</pre>
+  <pre class="out">printf count = 2
+scanf count  = 1</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">#include &lt;stdio.h&gt;
+int main()
+{
+    int a, b;
+    writef("Enter two numbers: ");
+    readf("%d %d", &amp;a, &amp;b);
+    writef("Sum = %d\n", a + b);
+    myprintf_count = 0;
+    return 0;
+}</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L8 – LEX: classify each input word as keyword, identifier, integer, real, invalid identifier or operator.</h2>
+  <h3>Code – l08_classify.l</h3>
+  <pre>/* L8. Read words from the keyboard and say whether each one is a
+       KEYWORD, IDENTIFIER, INTEGER, REAL number, INVALID identifier
+       or an OPERATOR / SYMBOL.                                       */
+%{
+#include &lt;stdio.h&gt;
+%}
+
+%%
+int|float|char|double|if|else|for|while|do|return|void|switch|case|break|continue|long|short|struct  { printf("%-10s : KEYWORD\n", yytext); }
+[a-zA-Z_][a-zA-Z0-9_]*          { printf("%-10s : IDENTIFIER\n", yytext); }
+[0-9]+"."[0-9]+                 { printf("%-10s : REAL NUMBER\n", yytext); }
+[0-9]+                          { printf("%-10s : INTEGER\n", yytext); }
+[0-9]+[a-zA-Z_][a-zA-Z0-9_]*    { printf("%-10s : INVALID IDENTIFIER\n", yytext); }
+"+"|"-"|"*"|"/"|"="|"&lt;"|"&gt;"     { printf("%-10s : OPERATOR\n", yytext); }
+[ \t\n]+                        ;
+.                               { printf("%-10s : SPECIAL SYMBOL\n", yytext); }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    printf("Enter input (Ctrl+D to end):\n");
+    yylex();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l08_classify.l</pre>
+  <pre>gcc lex.yy.c -o l08</pre>
+  <pre>./l08</pre>
+  <pre class="out">Enter input (Ctrl+D to end):
+int count 2abc 45 3.14 _tmp while + ;
+[Ctrl+D]
+int        : KEYWORD
+count      : IDENTIFIER
+2abc       : INVALID IDENTIFIER
+45         : INTEGER
+3.14       : REAL NUMBER
+_tmp       : IDENTIFIER
+while      : KEYWORD
++          : OPERATOR
+;          : SPECIAL SYMBOL</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L9 – LEX: toggle the case of every letter in text.txt (upper to lower, lower to upper).</h2>
+  <h3>Code – l09_case.l</h3>
+  <pre>/* L9. Convert lowercase letters to uppercase and uppercase to lowercase
+       (toggle case) for the contents of text.txt -&gt; output.txt          */
+%{
+#include &lt;stdio.h&gt;
+%}
+
+%%
+[a-z]       { fputc(yytext[0] - 32, yyout); }   /* 'a'(97) - 32 = 'A'(65) */
+[A-Z]       { fputc(yytext[0] + 32, yyout); }
+.|\n        { ECHO; }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("text.txt", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open text.txt\n"); return 1; }
+    yylex();
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l09_case.l</pre>
+  <pre>gcc lex.yy.c -o l09</pre>
+  <pre>cat text.txt</pre>
+  <pre class="out">Madam Anna saw a level racecar.
+Compiler Design lab 2026!
+Hello World, refer to noon notes.</pre>
+  <pre>./l09</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">mADAM aNNA SAW A LEVEL RACECAR.
+cOMPILER dESIGN LAB 2026!
+hELLO wORLD, REFER TO NOON NOTES.</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L10 – LEX: decide whether a sentence is simple or compound (contains and/or/but...).</h2>
+  <h3>Code – l10_sentence.l</h3>
+  <pre>/* L10. Check whether the given sentence is SIMPLE or COMPOUND.
+        If it contains a conjunction (and, or, but, because, so, yet)
+        it is compound, otherwise simple.                              */
+%{
+#include &lt;stdio.h&gt;
+int flag = 0;
+%}
+
+%%
+and|or|but|because|so|yet|AND|OR|BUT    { flag = 1; }
+[a-zA-Z]+                               ;   /* other words ("band", "order") */
+.|\n                                    ;
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    printf("Enter a sentence: ");
+    yylex();
+    if (flag) printf("COMPOUND sentence\n");
+    else      printf("SIMPLE sentence\n");
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l10_sentence.l</pre>
+  <pre>gcc lex.yy.c -o l10</pre>
+  <pre>./l10</pre>
+  <pre class="out">Enter a sentence: I like C but I love Lex
+[Ctrl+D]
+COMPOUND sentence</pre>
+  <pre>./l10</pre>
+  <pre class="out">Enter a sentence: the band played music
+[Ctrl+D]
+SIMPLE sentence</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>L11 – LEX: validate each line of a file as an email id, a 10-digit mobile number, a date (dd/mm/yyyy) or invalid.</h2>
+  <h3>Code – l11_validate.l</h3>
+  <pre>/* L11. Each line of data.txt contains one item. Check if it is a valid
+        EMAIL id, a valid 10-digit Indian MOBILE number, a valid DATE
+        (dd/mm/yyyy) or INVALID.                         -&gt; output.txt   */
+%{
+#include &lt;stdio.h&gt;
+%}
+
+%%
+^[a-zA-Z0-9._]+"@"[a-zA-Z]+("."[a-zA-Z]+)+\n    { yytext[yyleng-1] = '\0'; fprintf(yyout, "%-24s VALID EMAIL\n", yytext); }
+^[6-9][0-9]{9}\n                                 { yytext[yyleng-1] = '\0'; fprintf(yyout, "%-24s VALID MOBILE\n", yytext); }
+^(0[1-9]|[12][0-9]|3[01])"/"(0[1-9]|1[0-2])"/"[0-9]{4}\n   { yytext[yyleng-1] = '\0'; fprintf(yyout, "%-24s VALID DATE\n", yytext); }
+^.*\n                                            { yytext[yyleng-1] = '\0'; fprintf(yyout, "%-24s INVALID\n", yytext); }
+%%
+
+int yywrap() { return 1; }
+
+int main()
+{
+    yyin  = fopen("data.txt", "r");
+    yyout = fopen("output.txt", "w");
+    if (yyin == NULL) { printf("Cannot open data.txt\n"); return 1; }
+    yylex();
+    fclose(yyout);
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex l11_validate.l</pre>
+  <pre>gcc lex.yy.c -o l11</pre>
+  <pre>cat data.txt</pre>
+  <pre class="out">abc.cs@college.ac.in
+student@gmail
+9876543210
+5123456789
+25/11/2026
+32/13/2026
+hello world</pre>
+  <pre>./l11</pre>
+  <pre>cat output.txt</pre>
+  <pre class="out">abc.cs@college.ac.in     VALID EMAIL
+student@gmail            INVALID
+9876543210               VALID MOBILE
+5123456789               INVALID
+25/11/2026               VALID DATE
+32/13/2026               INVALID
+hello world              INVALID</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Part C – LEX + YACC Programs</h2>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y1 – LEX + YACC: calculator. Evaluate arithmetic expressions with + - * / unary minus and brackets, using correct precedence.  ★</h2>
+  <h3>Code – y01_calc.l</h3>
+  <pre>%{
+/* Y1 (lex part). Calculator tokens: numbers, operators, newline */
+#include &lt;stdlib.h&gt;
+#define YYSTYPE double          /* values are double (MUST match calc .y) */
+#include "y.tab.h"
+%}
+
+%%
+[0-9]+("."[0-9]+)?    { yylval = atof(yytext); return NUMBER; }
+[ \t]                 ;                     /* skip blanks              */
+\n                    { return '\n'; }      /* end of one expression    */
+.                     { return yytext[0]; } /* + - * / ( ) as themselves */
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y01_calc.y</h3>
+  <pre>%{
+/* Y1. CALCULATOR using LEX + YACC.
+       Evaluates arithmetic expressions with + - * / unary minus and ( )
+       following correct precedence and associativity.                 */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#define YYSTYPE double
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token NUMBER
+
+%left '+' '-'          /* lowest precedence, left associative */
+%left '*' '/'
+%right UMINUS          /* highest: unary minus               */
+
+%%
+input : /* empty */
+      | input line
+      ;
+
+line  : '\n'
+      | expr '\n'        { printf("Result = %g\n", $1); }
+      | error '\n'       { yyerrok; }          /* recover, continue */
+      ;
+
+expr  : expr '+' expr    { $$ = $1 + $3; }
+      | expr '-' expr    { $$ = $1 - $3; }
+      | expr '*' expr    { $$ = $1 * $3; }
+      | expr '/' expr    { if ($3 == 0) { printf("Divide by zero!\n"); $$ = 0; }
+                           else $$ = $1 / $3; }
+      | '-' expr %prec UMINUS   { $$ = -$2; }
+      | '(' expr ')'     { $$ = $2; }
+      | NUMBER           { $$ = $1; }
+      ;
+%%
+
+void yyerror(const char *s) { printf("Invalid expression\n"); }
+
+int main()
+{
+    printf("Enter expressions (Ctrl+D to quit):\n");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y01_calc.l</pre>
+  <pre>yacc -d y01_calc.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y01</pre>
+  <pre>./y01</pre>
+  <pre class="out">Enter expressions (Ctrl+D to quit):
+2+3*4
+Result = 14
+(2+3)*4
+Result = 20
+-5+10/4
+Result = -2.5
+2++
+Invalid expression
+[Ctrl+D]</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y2 – LEX + YACC: check whether an arithmetic expression is valid or invalid.  ★</h2>
+  <h3>Code – y02_valid_expr.l</h3>
+  <pre>%{
+/* Y2 (lex part). Tokens for an arithmetic expression */
+#include "y.tab.h"
+%}
+
+%%
+[a-zA-Z_][a-zA-Z0-9_]*    { return ID; }
+[0-9]+("."[0-9]+)?        { return NUMBER; }
+[ \t]                     ;
+\n                        { return '\n'; }
+.                         { return yytext[0]; }
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y02_valid_expr.y</h3>
+  <pre>%{
+/* Y2. Check whether an arithmetic expression is VALID or INVALID.
+       e.g.  a+b*(c-5)  -&gt; valid      a+*b  -&gt; invalid               */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token ID NUMBER
+%left '+' '-'
+%left '*' '/' '%'
+%right UMINUS
+
+%%
+stmt : expr '\n'       { printf("VALID expression\n"); exit(0); }
+     ;
+
+expr : expr '+' expr
+     | expr '-' expr
+     | expr '*' expr
+     | expr '/' expr
+     | expr '%' expr
+     | '-' expr %prec UMINUS
+     | '(' expr ')'
+     | ID
+     | NUMBER
+     ;
+%%
+
+void yyerror(const char *s) { printf("INVALID expression\n"); exit(0); }
+
+int main()
+{
+    printf("Enter an expression: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y02_valid_expr.l</pre>
+  <pre>yacc -d y02_valid_expr.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y02</pre>
+  <pre>./y02</pre>
+  <pre class="out">Enter an expression: a+b*(c-5)
+VALID expression</pre>
+  <pre>./y02</pre>
+  <pre class="out">Enter an expression: a+*b
+INVALID expression</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y3 – LEX + YACC: recognize a valid variable name (letter or _ followed by letters, digits or _).</h2>
+  <h3>Code – y03_variable.l</h3>
+  <pre>%{
+/* Y3 (lex part). Every character is sent to yacc separately */
+#include "y.tab.h"
+%}
+
+%%
+[a-zA-Z]    { return LETTER; }
+[0-9]       { return DIGIT; }
+"_"         { return UNDERSCORE; }
+\n          { return '\n'; }
+.           { return yytext[0]; }   /* any other char -&gt; syntax error */
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y03_variable.y</h3>
+  <pre>%{
+/* Y3. Recognize a VALID VARIABLE (identifier):
+       starts with a letter or _ , followed by letters, digits or _ .
+       Grammar:   var  -&gt; LETTER rest | UNDERSCORE rest
+                  rest -&gt; rest LETTER | rest DIGIT | rest UNDERSCORE | e   */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token LETTER DIGIT UNDERSCORE
+
+%%
+start : var '\n'              { printf("VALID variable\n"); exit(0); }
+      ;
+var   : LETTER rest
+      | UNDERSCORE rest
+      ;
+rest  : rest LETTER
+      | rest DIGIT
+      | rest UNDERSCORE
+      | /* empty */
+      ;
+%%
+
+void yyerror(const char *s) { printf("INVALID variable\n"); exit(0); }
+
+int main()
+{
+    printf("Enter a variable name: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y03_variable.l</pre>
+  <pre>yacc -d y03_variable.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y03</pre>
+  <pre>./y03</pre>
+  <pre class="out">Enter a variable name: sum_1
+VALID variable</pre>
+  <pre>./y03</pre>
+  <pre class="out">Enter a variable name: 2abc
+INVALID variable</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y4 – LEX + YACC: recognize the language a^n b^n (n &gt;= 1).</h2>
+  <h3>Code – y04_anbn.l</h3>
+  <pre>%{
+/* Y4 (lex part) */
+#include "y.tab.h"
+%}
+
+%%
+a       { return A; }
+b       { return B; }
+\n      { return '\n'; }
+.       { return yytext[0]; }
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y04_anbn.y</h3>
+  <pre>%{
+/* Y4. Recognize strings of the language  a^n b^n  (n &gt;= 1)
+       e.g. ab, aabb, aaabbb -&gt; accepted ;  aab, abab -&gt; rejected
+       Grammar:  S -&gt; a S b | a b                                     */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+%}
+
+%token A B
+
+%%
+start : S '\n'      { printf("String ACCEPTED (belongs to a^n b^n)\n"); exit(0); }
+      ;
+S     : A S B
+      | A B
+      ;
+%%
+
+void yyerror(const char *s) { printf("String REJECTED\n"); exit(0); }
+
+int main()
+{
+    printf("Enter the string: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y04_anbn.l</pre>
+  <pre>yacc -d y04_anbn.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y04</pre>
+  <pre>./y04</pre>
+  <pre class="out">Enter the string: aaabbb
+String ACCEPTED (belongs to a^n b^n)</pre>
+  <pre>./y04</pre>
+  <pre class="out">Enter the string: aab
+String REJECTED</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y5 – LEX + YACC: check the syntax of a for loop (supports nested loops, {} bodies and empty parts).  ★</h2>
+  <h3>Code – y05_for.l</h3>
+  <pre>%{
+/* Y5 (lex part). Tokens of a for statement */
+#include "y.tab.h"
+%}
+
+%%
+"for"                          { return FOR; }
+"int"                          { return INT; }
+[a-zA-Z_][a-zA-Z0-9_]*         { return ID; }
+[0-9]+                         { return NUM; }
+"&lt;="|"&gt;="|"=="|"!="|"&lt;"|"&gt;"    { return RELOP; }
+"&amp;&amp;"|"||"                      { return LOGOP; }
+"++"                           { return INC; }
+"--"                           { return DEC; }
+"+="|"-="|"*="|"/="            { return OPASSIGN; }
+[ \t\n]+                       ;                     /* skip white space */
+.                              { return yytext[0]; } /* ( ) ; { } = + - * / */
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y05_for.y</h3>
+  <pre>%{
+/* Y5. *** EXPECTED ***  Check the SYNTAX of a for loop using YACC.
+       Accepts e.g.   for(i=0; i&lt;n; i++) { sum = sum + i; }
+                      for(int i=0;i&lt;10 &amp;&amp; j!=3;i+=2) for(j=0;j&lt;i;j++) x=x*j;
+       Reads from a file given on command line, or from the keyboard.   */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+extern FILE *yyin;
+int loops = 0;
+%}
+
+%token FOR INT ID NUM RELOP LOGOP INC DEC OPASSIGN
+%left LOGOP
+%left RELOP
+%left '+' '-'
+%left '*' '/'
+
+%%
+program : forstmt                  { printf("VALID for loop  (%d for statement(s) found)\n", loops); }
+        ;
+
+forstmt : FOR '(' init ';' cond ';' update ')' body   { loops++; }
+        ;
+
+init    : ID '=' expr
+        | INT ID '=' expr
+        | /* empty */
+        ;
+
+cond    : expr                     /* i&lt;n , i&lt;n &amp;&amp; j!=3 , empty */
+        | /* empty */
+        ;
+
+update  : ID INC | ID DEC | INC ID | DEC ID
+        | ID '=' expr
+        | ID OPASSIGN expr
+        | /* empty */
+        ;
+
+body    : stmt
+        | '{' stmts '}'
+        ;
+
+stmts   : stmts stmt
+        | /* empty */
+        ;
+
+stmt    : ID '=' expr ';'
+        | ID OPASSIGN expr ';'
+        | ID INC ';'
+        | ID DEC ';'
+        | forstmt
+        | ';'
+        ;
+
+expr    : expr '+' expr
+        | expr '-' expr
+        | expr '*' expr
+        | expr '/' expr
+        | expr RELOP expr
+        | expr LOGOP expr
+        | '(' expr ')'
+        | ID
+        | NUM
+        ;
+%%
+
+void yyerror(const char *s) { printf("INVALID for loop (syntax error)\n"); exit(0); }
+
+int main(int argc, char *argv[])
+{
+    if (argc &gt; 1) {                       /* ./forcheck loop.txt */
+        yyin = fopen(argv[1], "r");
+        if (yyin == NULL) { printf("Cannot open %s\n", argv[1]); return 1; }
+    } else
+        printf("Enter the for loop (Ctrl+D to end):\n");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y05_for.l</pre>
+  <pre>yacc -d y05_for.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y05</pre>
+  <pre>cat loop.txt</pre>
+  <pre class="out">for(i = 0; i &lt; n; i++)
+{
+    sum = sum + i;
+    for(j = 0; j &lt; i &amp;&amp; j != 3; j += 2)
+        x = x * j;
+}</pre>
+  <pre>./y05 loop.txt</pre>
+  <pre class="out">VALID for loop  (2 for statement(s) found)</pre>
+  <pre>./y05</pre>
+  <pre class="out">Enter the for loop (Ctrl+D to end):
+for(i=0 i&lt;n; i++) x=1;
+[Ctrl+D]
+INVALID for loop (syntax error)</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y6 – LEX + YACC: convert an infix expression to postfix.  ★</h2>
+  <h3>Code – y06_postfix.l</h3>
+  <pre>%{
+/* Y6 (lex part). yylval carries the number value or the variable letter */
+#include &lt;stdlib.h&gt;
+#include "y.tab.h"
+%}
+
+%%
+[0-9]+      { yylval = atoi(yytext); return NUM; }
+[a-zA-Z]    { yylval = yytext[0];    return ID;  }
+[ \t]       ;
+\n          { return '\n'; }
+.           { return yytext[0]; }
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y06_postfix.y</h3>
+  <pre>%{
+/* Y6. Convert an INFIX expression to POSTFIX.
+       Idea: an operator is appended only AFTER both its operands
+       have been reduced, so the output is automatically postfix.
+       a+b*c  -&gt;  a b c * +                                           */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+char post[500] = "";                 /* postfix result is built here */
+void add(char *s) { strcat(post, s); strcat(post, " "); }
+%}
+
+%token NUM ID
+%left '+' '-'
+%left '*' '/'
+%right '^'
+
+%%
+line : expr '\n'         { printf("Postfix: %s\n", post); exit(0); }
+     ;
+expr : expr '+' expr     { add("+"); }
+     | expr '-' expr     { add("-"); }
+     | expr '*' expr     { add("*"); }
+     | expr '/' expr     { add("/"); }
+     | expr '^' expr     { add("^"); }
+     | '(' expr ')'
+     | NUM               { char b[20]; sprintf(b, "%d", $1); add(b); }
+     | ID                { char b[2] = { (char)$1, '\0' };  add(b); }
+     ;
+%%
+
+void yyerror(const char *s) { printf("Invalid expression\n"); exit(0); }
+
+int main()
+{
+    printf("Enter infix expression: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y06_postfix.l</pre>
+  <pre>yacc -d y06_postfix.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y06</pre>
+  <pre>./y06</pre>
+  <pre class="out">Enter infix expression: (a+b)*c-d/e
+Postfix: a b + c * d e / - </pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y7 – LEX + YACC: validate a C declaration statement like  int a, b[10], c = 5;</h2>
+  <h3>Code – y07_decl.l</h3>
+  <pre>%{
+/* Y7 (lex part) */
+#include "y.tab.h"
+%}
+
+%%
+int|float|char|double|long     { return TYPE; }
+[a-zA-Z_][a-zA-Z0-9_]*         { return ID; }
+[0-9]+("."[0-9]+)?             { return NUM; }
+[ \t]                          ;
+\n                             { return '\n'; }
+.                              { return yytext[0]; }   /* , ; [ ] = */
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y07_decl.y</h3>
+  <pre>%{
+/* Y7. Check whether a C DECLARATION statement is valid.
+       e.g.  int a, b[10], c = 5;    -&gt; valid
+             float x y;              -&gt; invalid                       */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+int vars = 0;
+%}
+
+%token TYPE ID NUM
+
+%%
+start : decl '\n'              { printf("VALID declaration (%d variable(s))\n", vars); exit(0); }
+      ;
+decl  : TYPE list ';'
+      ;
+list  : list ',' var
+      | var
+      ;
+var   : ID                     { vars++; }
+      | ID '[' NUM ']'         { vars++; }
+      | ID '=' NUM             { vars++; }
+      ;
+%%
+
+void yyerror(const char *s) { printf("INVALID declaration\n"); exit(0); }
+
+int main()
+{
+    printf("Enter declaration: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y07_decl.l</pre>
+  <pre>yacc -d y07_decl.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y07</pre>
+  <pre>./y07</pre>
+  <pre class="out">Enter declaration: int a, b[10], c = 5;
+VALID declaration (3 variable(s))</pre>
+  <pre>./y07</pre>
+  <pre class="out">Enter declaration: float x y;
+INVALID declaration</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Y8 – LEX + YACC (bonus): generate three-address code for an assignment statement.</h2>
+  <h3>Code – y08_tac.l</h3>
+  <pre>%{
+/* Y8 (lex part). Identifiers and numbers are passed as strings */
+#include &lt;string.h&gt;
+#include "y.tab.h"
+%}
+
+%%
+[a-zA-Z_][a-zA-Z0-9_]*   { yylval.str = strdup(yytext); return ID; }
+[0-9]+                   { yylval.str = strdup(yytext); return NUM; }
+[ \t]                    ;
+\n                       { return '\n'; }
+.                        { return yytext[0]; }
+%%
+
+int yywrap() { return 1; }</pre>
+  <h3>Code – y08_tac.y</h3>
+  <pre>%{
+/* Y8. (Bonus) Generate THREE ADDRESS CODE for an assignment statement.
+       a = b + c * d - e   -&gt;   t1 = c * d
+                                t2 = b + t1
+                                t3 = t2 - e
+                                a = t3                                 */
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+#include &lt;string.h&gt;
+int yylex(void);
+void yyerror(const char *s);
+int tcount = 0;
+
+char *newTemp()                     /* returns "t1", "t2", ... */
+{
+    char buf[10];
+    sprintf(buf, "t%d", ++tcount);
+    return strdup(buf);
+}
+%}
+
+%union { char *str; }               /* every value is a string */
+%token &lt;str&gt; ID NUM
+%type  &lt;str&gt; expr
+%left '+' '-'
+%left '*' '/'
+%right UMINUS
+
+%%
+stmt : ID '=' expr '\n'      { printf("%s = %s\n", $1, $3); exit(0); }
+     ;
+expr : expr '+' expr         { $$ = newTemp(); printf("%s = %s + %s\n", $$, $1, $3); }
+     | expr '-' expr         { $$ = newTemp(); printf("%s = %s - %s\n", $$, $1, $3); }
+     | expr '*' expr         { $$ = newTemp(); printf("%s = %s * %s\n", $$, $1, $3); }
+     | expr '/' expr         { $$ = newTemp(); printf("%s = %s / %s\n", $$, $1, $3); }
+     | '-' expr %prec UMINUS { $$ = newTemp(); printf("%s = minus %s\n", $$, $2); }
+     | '(' expr ')'          { $$ = $2; }
+     | ID                    { $$ = $1; }
+     | NUM                   { $$ = $1; }
+     ;
+%%
+
+void yyerror(const char *s) { printf("Invalid statement\n"); exit(0); }
+
+int main()
+{
+    printf("Enter assignment statement: ");
+    yyparse();
+    return 0;
+}</pre>
+  <h3>Compile &amp; Run</h3>
+  <pre>lex y08_tac.l</pre>
+  <pre>yacc -d y08_tac.y</pre>
+  <pre>gcc lex.yy.c y.tab.c -o y08</pre>
+  <pre>./y08</pre>
+  <pre class="out">Enter assignment statement: a = b + c * d - e
+t1 = c * d
+t2 = b + t1
+t3 = t2 - e
+a = t3</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Part D – Theory</h2>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>C File Handling – functions, fopen modes, reading patterns</h2>
+  <h3>FILE HANDLING IN C  (stdio.h)</h3>
+  <pre>FILE *fp;                         /* file pointer                       */
+fp = fopen("input.c", "r");       /* returns NULL if it fails           */
+if (fp == NULL) { printf("Cannot open file\n"); return 1; }
+...
+fclose(fp);                       /* ALWAYS close (flushes the output)  */</pre>
+  <h3>fopen MODES</h3>
+  <pre class="out">  "r"   read            file must exist, else NULL
+  "w"   write           creates the file / ERASES the old content
+  "a"   append          writes at the end, creates if missing
+  "r+"  read + write    file must exist
+  "w+"  read + write    erases / creates
+  "a+"  read + append
+  add b for binary: "rb" "wb"</pre>
+  <h3>READ / WRITE FUNCTIONS</h3>
+  <pre class="out">  int  fgetc(fp)                 read 1 char, returns EOF (-1) at the end
+  int  fputc(ch, fp)             write 1 char
+  int  ungetc(ch, fp)            push 1 char BACK (look-ahead trick)
+  char*fgets(buf, size, fp)      read 1 line (KEEPS the '\n'), NULL at the end
+  int  fputs(str, fp)            write a string (no '\n' added)
+  int  fscanf(fp, "%s", w)       read formatted, returns no. of items read
+  int  fprintf(fp, "%d\n", x)    write formatted
+  size_t fread(buf,1,n,fp)       read n bytes     | fwrite(buf,1,n,fp)
+  int  feof(fp)                  non-zero after EOF was hit
+  fseek(fp, 0, SEEK_SET)  rewind(fp)  ftell(fp)  -&gt; move / get position</pre>
+  <h3>4 STANDARD READING PATTERNS  (memorise these)</h3>
+  <pre>/* 1. char by char */
+int ch;                                   /* int, NOT char ! */
+while ((ch = fgetc(fp)) != EOF) { ... }
+
+/* 2. line by line */
+char line[500];
+while (fgets(line, sizeof(line), fp) != NULL) { ... }
+
+/* 3. word by word */
+char w[100];
+while (fscanf(fp, "%s", w) == 1) { ... }
+
+/* 4. whole file into an array  (best for tokenizing / brackets) */
+char s[20000]; int n = 0;
+while ((ch = fgetc(fp)) != EOF) s[n++] = ch;
+s[n] = '\0';</pre>
+  <h3>FILE NAMES FROM THE COMMAND LINE   ./a.out input.c output.txt</h3>
+  <pre>int main(int argc, char *argv[])
+{
+    if (argc &lt; 3) { printf("Usage: %s infile outfile\n", argv[0]); return 1; }
+    FILE *in  = fopen(argv[1], "r");
+    FILE *out = fopen(argv[2], "w");
+    ...
+}</pre>
+  <h3>COMPILE &amp; RUN</h3>
+  <pre>gcc prog.c -o prog          # compile
+./prog                      # run
+cat output.txt              # see the output file
+gcc -Wall prog.c -o prog    # show all warnings (good for debugging)</pre>
+  <pre class="out">➜ Always print the output to the FILE (fprintf(out, ...)), and also show it with cat output.txt.
+➜ Forgot fclose(out)? The output file may come out EMPTY because the buffer was never flushed.</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>C String &amp; Character Functions</h2>
+  <h3>STRING FUNCTIONS  (string.h)</h3>
+  <pre class="out">  strlen(s)              length, without '\0'
+  strcpy(d, s)           copy s into d          strncpy(d, s, n)
+  strcat(d, s)           append s to d          strncat(d, s, n)
+  strcmp(a, b)           0 if equal, &lt;0 if a&lt;b, &gt;0 if a&gt;b
+  strncmp(a, b, n)       compare the first n chars  &lt;- "starts with" check
+  strchr(s, c)           pointer to first c in s, or NULL
+  strrchr(s, c)          pointer to last c
+  strstr(s, sub)         pointer to first sub in s, or NULL
+  strtok(s, " ,;")       split into tokens (CHANGES s!)
+  sprintf(buf, "t%d", 3) print INTO a string -&gt; "t3"
+  sscanf(str, "%d %s", &amp;x, w)   read FROM a string
+  atoi("42") -&gt; 42   atof("3.5") -&gt; 3.5    (stdlib.h)</pre>
+  <h3>CHARACTER FUNCTIONS  (ctype.h)</h3>
+  <pre class="out">  isalpha(c)  letter          isdigit(c)  0-9
+  isalnum(c)  letter or digit isspace(c)  ' ' \t \n \r \v \f
+  isupper(c)  islower(c)      ispunct(c)  punctuation
+  toupper(c)  tolower(c)</pre>
+  <h3>strtok EXAMPLE</h3>
+  <pre>char line[] = "int a, b, c;";
+char *t = strtok(line, " ,;");        /* first call: pass the string */
+while (t != NULL) {
+    printf("%s\n", t);                /* int  a  b  c                */
+    t = strtok(NULL, " ,;");          /* next calls: pass NULL       */
+}</pre>
+  <h3>sscanf SCANSETS</h3>
+  <pre>sscanf("#include &lt;stdio.h&gt;", "#include &lt;%[^&gt;]&gt;", h);   /* h = "stdio.h"  */
+%[^&gt;]   read everything that is NOT '&gt;'
+%[a-z]  read only lowercase letters</pre>
+  <h3>WRITE THEM YOURSELF  (if asked "without library functions")</h3>
+  <pre>int length(char *s)          { int n = 0; while (s[n]) n++; return n; }
+void copy(char *d, char *s)  { int i = 0; while ((d[i] = s[i]) != '\0') i++; }
+int compare(char *a, char *b){ int i = 0;
+    while (a[i] &amp;&amp; a[i] == b[i]) i++;
+    return a[i] - b[i]; }
+void reverse(char *s)        { int i = 0, j = length(s) - 1; char t;
+    while (i &lt; j) { t = s[i]; s[i] = s[j]; s[j] = t; i++; j--; } }
+char upper(char c)           { return (c &gt;= 'a' &amp;&amp; c &lt;= 'z') ? c - 32 : c; }</pre>
+  <h3>KEYWORD CHECK  (used in many programs)</h3>
+  <pre>char *keywords[] = {"auto","break","case","char","const","continue",
+    "default","do","double","else","enum","extern","float","for","goto",
+    "if","int","long","register","return","short","signed","sizeof",
+    "static","struct","switch","typedef","union","unsigned","void",
+    "volatile","while"};                       /* 32 keywords of C */
+
+int isKeyword(char *w)
+{
+    for (int i = 0; i &lt; 32; i++)
+        if (strcmp(w, keywords[i]) == 0) return 1;
+    return 0;
+}</pre>
+  <pre class="out">➜ Strings end with '\0'. Size the array 1 more than the longest text.
+➜ fgets keeps the '\n'. Remove it with:  line[strcspn(line, "\n")] = '\0';
+➜ Compare strings with strcmp(a,b)==0, NEVER with a==b (that compares addresses).</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>LEX – structure, regular expressions, variables, commands</h2>
+  <h3>WHAT IS LEX?</h3>
+  <pre class="out">Lex (on Ubuntu: flex) is a LEXICAL ANALYZER GENERATOR. You write patterns
+(regular expressions) plus C actions in a .l file. Lex turns it into a C file,
+lex.yy.c, which contains the function yylex().
+
+    file.l  --lex--&gt;  lex.yy.c  --gcc--&gt;  a.out  --&gt; tokens / output</pre>
+  <h3>STRUCTURE OF A .l FILE  (3 sections, separated by %%)</h3>
+  <pre>%{
+/* 1. DEFINITIONS: C code copied as it is (headers, globals) */
+#include &lt;stdio.h&gt;
+int count = 0;
+%}
+DIGIT   [0-9]
+ID      [a-zA-Z_][a-zA-Z0-9_]*
+%%
+{DIGIT}+       { printf("NUMBER %s\n", yytext); }
+{ID}            { count++; }
+\n              ;                   /* empty action = ignore */
+.               ;
+%%
+/* 3. USER CODE: main() and helper functions */
+int yywrap() { return 1; }
+int main() { yylex(); printf("%d\n", count); return 0; }</pre>
+  <pre class="out">  Section 1 = definitions (%{ C code %} + named patterns)
+  Section 2 = rules       pattern   { action }
+  Section 3 = user code   main(), yywrap(), helpers
+➜ Patterns must start in COLUMN 1 (no space before them in the rules section).
+➜ Put C comments in the rules section AFTER the action, or indented. Never at column 1.</pre>
+  <h3>REGULAR EXPRESSIONS IN LEX</h3>
+  <pre class="out">  x        the char x               "abc"    the exact string abc
+  .        any char EXCEPT \n       \n \t    newline, tab
+  [abc]    a or b or c              [a-z]    range
+  [^abc]   any char except a b c    [^\n]    any char but newline
+  r*       0 or more                r+       1 or more
+  r?       0 or 1 (optional)        r{2,5}   2 to 5 times   r{3} exactly 3
+  r|s      r or s                   (r)      grouping
+  ^r       r at start of a line     r$       r at end of a line
+  r/s      r only if followed by s (trailing context)
+  \.  \*  \+  \(   escape special chars,  or quote them: "." "*" "+" "("
+  {NAME}   use a definition</pre>
+  <h3>SPECIAL VARIABLES &amp; FUNCTIONS</h3>
+  <pre class="out">  yytext     char*  the text that matched
+  yyleng     int    length of yytext
+  yylex()    the scanner. Call it to start; returns a token (with yacc)
+  yywrap()   called at EOF. return 1 = stop, 0 = more input
+  yyin       FILE*  input  (default stdin)  -&gt; yyin = fopen("input.c","r");
+  yyout      FILE*  output (default stdout) -&gt; yyout = fopen("out.txt","w");
+  ECHO       copy yytext to yyout
+  yylval     value passed to yacc together with the token
+  BEGIN S    switch to start condition S;  BEGIN INITIAL = back to normal
+  %x S       exclusive start condition (only &lt;S&gt; rules are active)
+  %s S       inclusive start condition (&lt;S&gt; rules + normal rules)
+  yymore()   append the next match to yytext
+  yyless(n)  keep only the first n chars, push the rest back
+  input()    read 1 char,   unput(c)  push 1 char back</pre>
+  <h3>HOW LEX CHOOSES A RULE  (very common viva question)</h3>
+  <pre class="out">  1. LONGEST MATCH wins:  "&lt;=" beats "&lt;",  identifier "format" beats keyword "for"
+  2. If two rules match the SAME length, the rule written FIRST wins.
+     -&gt; write keyword rules ABOVE the identifier rule!</pre>
+  <h3>COMMON PATTERNS</h3>
+  <pre>[0-9]+                          integer
+[0-9]+"."[0-9]+                 real number
+[+-]?[0-9]+                     signed integer
+[a-zA-Z_][a-zA-Z0-9_]*          identifier
+\"(\\.|[^"\\])*\"               string literal "..."
+"//".*                          single line comment
+"/*"([^*]|\*+[^*/])*\*+"/"      multi line comment
+[ \t]+                          white space
+^[ \t]*\n                       blank line</pre>
+  <h3>COMPILE &amp; RUN</h3>
+  <pre>lex prog.l                 # or: flex prog.l   -&gt; creates lex.yy.c
+gcc lex.yy.c -o prog       # works because we wrote yywrap() ourselves
+gcc lex.yy.c -o prog -ll   # if yywrap() is NOT defined (or use -lfl)
+./prog                     # type input, end with Ctrl+D
+./prog &lt; input.txt         # input from a file via the shell</pre>
+  <h3>ERRORS YOU MAY SEE</h3>
+  <pre class="out">  undefined reference to `yywrap'  -&gt; add int yywrap(){return 1;} or link with -ll
+  unrecognized rule                -&gt; space before the pattern / bad quoting
+  premature EOF                    -&gt; missing %% or unclosed %{ / " / [</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>YACC – structure, keywords, Lex + Yacc commands</h2>
+  <h3>WHAT IS YACC?</h3>
+  <pre class="out">Yacc (Yet Another Compiler Compiler; on Ubuntu: bison -y) is a PARSER GENERATOR.
+You give it a context-free GRAMMAR with C actions. It produces an LALR(1)
+parser, yyparse(), in y.tab.c. Lex gives the tokens; yacc checks the grammar.
+
+  input --&gt; yylex() [lex.yy.c] --tokens+yylval--&gt; yyparse() [y.tab.c] --&gt; actions</pre>
+  <h3>STRUCTURE OF A .y FILE</h3>
+  <pre>%{
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+int yylex(void);                    /* prototypes: avoid gcc warnings */
+void yyerror(const char *s);
+%}
+%token NUMBER ID                    /* terminals that lex returns     */
+%left '+' '-'                       /* LOW precedence                 */
+%left '*' '/'                       /* higher (written later)         */
+%right UMINUS                       /* highest                        */
+%%
+line : expr '\n'          { printf("= %d\n", $1); }
+     ;
+expr : expr '+' expr      { $$ = $1 + $3; }
+     | expr '*' expr      { $$ = $1 * $3; }
+     | '(' expr ')'       { $$ = $2; }
+     | '-' expr %prec UMINUS { $$ = -$2; }
+     | NUMBER             { $$ = $1; }
+     ;
+%%
+void yyerror(const char *s) { printf("Error: %s\n", s); }
+int main() { yyparse(); return 0; }</pre>
+  <h3>MATCHING LEX FILE</h3>
+  <pre>%{
+#include &lt;stdlib.h&gt;
+#include "y.tab.h"          /* token numbers made by  yacc -d  */
+%}
+%%
+[0-9]+    { yylval = atoi(yytext); return NUMBER; }
+[ \t]     ;
+\n        { return '\n'; }
+.         { return yytext[0]; }   /* + - * / ( ) as char tokens */
+%%
+int yywrap() { return 1; }</pre>
+  <h3>YACC KEYWORDS</h3>
+  <pre class="out">  %token A B          declare tokens (terminals)
+  %left / %right      operator associativity + precedence (later line = higher)
+  %nonassoc           no associativity (a &lt; b &lt; c is an error)
+  %prec X             give this rule the precedence of X (unary minus)
+  %start s            start symbol (default: left side of the first rule)
+  %union {int i; char *s;}  several value types
+  %token &lt;s&gt; ID       token with the type s from the union
+  %type  &lt;i&gt; expr     non-terminal with a type
+  $$                  value of the left-hand side
+  $1 $2 $3            values of the 1st, 2nd, 3rd symbols on the right
+  yylval              value set by lex for the current token
+  yyparse()           start parsing: returns 0 = success, 1 = error
+  yyerror(s)          called automatically on a syntax error
+  error / yyerrok     error-recovery token / resume after an error
+  YYSTYPE             type of values (default int); #define YYSTYPE double</pre>
+  <h3>COMPILE &amp; RUN  (ORDER MATTERS)</h3>
+  <pre>lex  calc.l                       # -&gt; lex.yy.c
+yacc -d calc.y                    # -&gt; y.tab.c + y.tab.h  (-d makes the .h!)
+gcc lex.yy.c y.tab.c -o calc      # add -ll if yywrap() is not defined
+./calc</pre>
+  <pre class="out">  (bison alternative:  bison -dy calc.y  gives the same file names)</pre>
+  <h3>ERRORS YOU MAY SEE</h3>
+  <pre class="out">  y.tab.h: No such file        -&gt; you forgot -d in  yacc -d
+  conflicts: 1 shift/reduce    -&gt; ambiguous grammar; add %left / %right
+  syntax error at runtime      -&gt; input does not match the grammar (yyerror)
+  implicit declaration of yylex-&gt; add  int yylex(void);  in the .y file</pre>
+  <h3>GRAMMAR TIPS</h3>
+  <pre class="out">➜ Prefer LEFT recursion: list : list ',' ID | ID ;   (uses less stack in LALR)
+➜ Empty rule:   opt : /* empty */ | X ;
+➜ Char tokens like '+' need no %token; lex just does  return yytext[0];</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>General skeleton for any “print tokens between X and Y” question</h2>
+  <h3>C TOKENIZER SKELETON  (adapt it to ANY unseen question)</h3>
+  <pre>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+#include &lt;ctype.h&gt;
+
+int main()
+{
+    FILE *in = fopen("input.c", "r"), *out = fopen("output.txt", "w");
+    char s[20000], tok[100];
+    int n = 0, ch, i = 0, k, line = 1;
+    if (in == NULL) { printf("Cannot open\n"); return 1; }
+    while ((ch = fgetc(in)) != EOF) s[n++] = ch;
+    s[n] = '\0';
+
+    while (s[i]) {
+        k = 0;
+        if (s[i] == '\n') { line++; i++; continue; }
+        if (isspace(s[i])) { i++; continue; }
+        if (s[i]=='/' &amp;&amp; s[i+1]=='/') { while (s[i] &amp;&amp; s[i]!='\n') i++; continue; }
+        if (s[i]=='/' &amp;&amp; s[i+1]=='*') { i += 2;
+            while (s[i] &amp;&amp; !(s[i]=='*' &amp;&amp; s[i+1]=='/')) { if (s[i]=='\n') line++; i++; }
+            i += 2; continue; }
+        if (s[i]=='"') { tok[k++] = s[i++];
+            while (s[i] &amp;&amp; s[i]!='"') tok[k++] = s[i++];
+            tok[k++] = s[i++]; tok[k] = '\0';            /* STRING      */ }
+        else if (isalpha(s[i]) || s[i]=='_') {
+            while (isalnum(s[i]) || s[i]=='_') tok[k++] = s[i++];
+            tok[k] = '\0';                                /* WORD        */ }
+        else if (isdigit(s[i])) {
+            while (isdigit(s[i]) || s[i]=='.') tok[k++] = s[i++];
+            tok[k] = '\0';                                /* NUMBER      */ }
+        else { tok[0] = s[i++]; tok[1] = '\0';            /* SYMBOL / OP */ }
+
+        fprintf(out, "%d\t%s\n", line, tok);              /* YOUR ACTION */
+    }
+    fclose(in); fclose(out);
+    return 0;
+}</pre>
+  <h3>FIND THE MATCHING BRACKET  (for / while / if / function body)</h3>
+  <pre>/* j is at '(' -&gt; after the loop j is at the matching ')' */
+int depth = 0;
+while (s[j]) {
+    if (s[j] == '(') depth++;
+    else if (s[j] == ')') { depth--; if (depth == 0) break; }
+    j++;
+}
+/* same with '{' '}' for blocks, '[' ']' for arrays */</pre>
+  <h3>MATCH A WHOLE WORD AT POSITION i</h3>
+  <pre>if (strncmp(&amp;s[i], "for", 3) == 0 &amp;&amp;
+    (i == 0 || !(isalnum(s[i-1]) || s[i-1]=='_')) &amp;&amp;   /* char before */
+    !(isalnum(s[i+3]) || s[i+3]=='_'))                 /* char after  */
+{ /* found the keyword for */ }</pre>
+  <pre class="out">➜ With these 3 blocks you can solve any "print X between Y and Z" question.</pre>
+
+  <!-- ───────────────────────────────────────── -->
+  <hr>
+  <h2>Viva Questions &amp; Answers</h2>
+  <h3>Q1. What is a compiler? Name its phases.</h3>
+  <pre class="out">A compiler translates a high-level program into target code. Phases: Lexical analysis -&gt; Syntax analysis -&gt; Semantic analysis -&gt; Intermediate code generation -&gt; Code optimization -&gt; Code generation. The symbol table manager and the error handler work across all phases.</pre>
+  <h3>Q2. What does the lexical analyzer do?</h3>
+  <pre class="out">It reads characters and groups them into TOKENS (keywords, identifiers, constants, operators, symbols). It removes white space and comments, keeps line numbers for error messages, and enters identifiers into the symbol table.</pre>
+  <h3>Q3. Token vs lexeme vs pattern?</h3>
+  <pre class="out">Token = category (IDENTIFIER). Lexeme = the actual text (sum). Pattern = the rule that describes the lexemes of a token ([a-zA-Z_][a-zA-Z0-9_]*).</pre>
+  <h3>Q4. How many tokens are in  for(i=0;i&lt;n;i++) ?</h3>
+  <pre class="out">for ( i = 0 ; i &lt; n ; i ++ )  = 13 tokens (counting the brackets). Between the brackets there are 10.</pre>
+  <h3>Q5. What is a symbol table?</h3>
+  <pre class="out">A data structure storing information about identifiers: name, type, scope, size, line and address. It is built in the lexical/syntax phases and used by every later phase.</pre>
+  <h3>Q6. What is Lex? What is Yacc?</h3>
+  <pre class="out">Lex is a lexical analyzer generator: regular expressions in, lex.yy.c with yylex() out. Yacc is a parser generator: a CFG in, y.tab.c with yyparse() out. It is an LALR(1) parser.</pre>
+  <h3>Q7. What are yytext, yyleng, yyin, yyout?</h3>
+  <pre class="out">yytext = the matched lexeme, yyleng = its length, yyin = the input FILE* (default stdin), yyout = the output FILE* (default stdout).</pre>
+  <h3>Q8. What is yywrap()?</h3>
+  <pre class="out">It is called by yylex() at end of input. Return 1 means no more input, so stop. Return 0 means more input is ready (e.g. another file in yyin). Without it you must link with -ll or -lfl.</pre>
+  <h3>Q9. What happens when two lex rules match?</h3>
+  <pre class="out">The longest match is chosen. If the lengths are equal, the rule that appears first in the file is chosen. That is why keyword rules come before the identifier rule.</pre>
+  <h3>Q10. What is a start condition in lex?</h3>
+  <pre class="out">A state that turns groups of rules on or off. %x declares an exclusive state and %s an inclusive one. BEGIN STATE enters it and BEGIN INITIAL returns to normal. It is used for comments, strings, or tokens inside for(...).</pre>
+  <h3>Q11. What is yylval?</h3>
+  <pre class="out">A global variable through which lex passes the VALUE of a token to yacc (e.g. the number 25 for the token NUMBER). Its type is YYSTYPE (int by default).</pre>
+  <h3>Q12. What do $$ and $1 mean in yacc?</h3>
+  <pre class="out">$$ = the value of the non-terminal on the left side. $1, $2 ... = the values of the 1st, 2nd ... symbols on the right side of the rule.</pre>
+  <h3>Q13. What does yacc -d do?</h3>
+  <pre class="out">It also creates y.tab.h, which holds the #define token numbers and the yylval declaration. The lex file includes it so both agree on the token codes.</pre>
+  <h3>Q14. Order of commands for lex + yacc?</h3>
+  <pre class="out">lex file.l ; yacc -d file.y ; gcc lex.yy.c y.tab.c -o out ; ./out. Run yacc -d before compiling lex.yy.c because it needs y.tab.h.</pre>
+  <h3>Q15. What is a shift/reduce conflict?</h3>
+  <pre class="out">The parser cannot decide whether to shift the next token or reduce by a rule. It happens with ambiguous grammars like E -&gt; E+E. Fix it with %left/%right precedence or by rewriting the grammar. By default yacc shifts.</pre>
+  <h3>Q16. What is a reduce/reduce conflict?</h3>
+  <pre class="out">Two different rules can reduce the same input. Yacc picks the rule listed first. It usually means the grammar is wrong.</pre>
+  <h3>Q17. What is %left / %right / %nonassoc?</h3>
+  <pre class="out">They declare the associativity of operators. Their order sets precedence: a line written later has higher precedence. %nonassoc forbids chaining (a&lt;b&lt;c).</pre>
+  <h3>Q18. What is %prec?</h3>
+  <pre class="out">It gives a rule the precedence of a named token, e.g. '-' expr %prec UMINUS makes unary minus bind tighter than * and /.</pre>
+  <h3>Q19. Which parser does yacc build?</h3>
+  <pre class="out">An LALR(1) bottom-up shift-reduce parser: Look-Ahead LR with 1 token of lookahead.</pre>
+  <h3>Q20. Top-down vs bottom-up parsing?</h3>
+  <pre class="out">Top-down (LL, recursive descent) starts from the start symbol and expands it to the input. Bottom-up (LR, SLR, LALR, CLR) starts from the input and reduces it to the start symbol. Yacc is bottom-up.</pre>
+  <h3>Q21. Why is left recursion bad for top-down but fine for yacc?</h3>
+  <pre class="out">A recursive-descent parser loops forever on A -&gt; A a. LR parsers handle left recursion well, and it even uses less stack than right recursion.</pre>
+  <h3>Q22. What is three-address code?</h3>
+  <pre class="out">Intermediate code where every instruction has at most 3 addresses: x = y op z. Example: a = b + c * d becomes t1 = c * d ; t2 = b + t1 ; a = t2.</pre>
+  <h3>Q23. What is the difference between fgetc and fgets?</h3>
+  <pre class="out">fgetc reads one character and returns int (EOF at the end). fgets reads one line into a buffer (keeping the '\n') and returns NULL at the end.</pre>
+  <h3>Q24. Why is ch declared as int and not char with fgetc?</h3>
+  <pre class="out">fgetc returns EOF (-1) as an int. On systems where char is unsigned, a char can never equal -1, so the loop would never end.</pre>
+  <h3>Q25. What does ungetc do?</h3>
+  <pre class="out">It pushes one character back into the input stream, so the next fgetc returns it again. It is used for 1-char look-ahead (e.g. '/' that is not followed by '/' or '*').</pre>
+  <h3>Q26. Difference between "w" and "a" mode?</h3>
+  <pre class="out">"w" truncates (erases) the file, or creates it. "a" keeps the content and writes at the end.</pre>
+  <h3>Q27. What errors are detected by the lexical analyzer?</h3>
+  <pre class="out">Illegal characters (@ or $ in C), unterminated strings or comments, invalid numbers like 12.3.4, and identifiers that are too long.</pre>
+  <h3>Q28. What is a regular expression? Give an identifier RE.</h3>
+  <pre class="out">A pattern that describes a regular language. An identifier is letter(letter|digit)*, in lex: [a-zA-Z_][a-zA-Z0-9_]*.</pre>
+  <h3>Q29. What is the input buffering / sentinel concept?</h3>
+  <pre class="out">The lexer reads input into buffer halves with two pointers (lexemeBegin, forward). A sentinel (eof) at the end of each half avoids checking the bounds on every character.</pre>
+  <h3>Q30. What is a context-free grammar?</h3>
+  <pre class="out">G = (V, T, P, S): variables, terminals, productions of the form A -&gt; alpha, and a start symbol. Yacc input is a CFG.</pre>
+</div>
+
+<script>
+  const now = new Date();
+  const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  const timeStr = months[now.getMonth()] + ' ' + now.getDate() + ' ' + 
+        String(now.getHours()).padStart(2, '0') + ':' + 
+        String(now.getMinutes()).padStart(2, '0');
+  document.getElementById('clock').textContent = timeStr;
+
+  const termBody = document.getElementById('term-body');
+  const promptHtml = '<span class="prompt-col"><span class="prompt-user">iem@iem-MS-7D82</span>:<span class="prompt-tilde">~</span>$</span> ';
+
+  function escapeHtml(unsafe) {
+    if (!unsafe) return "";
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;");
+  }
+
+  function addCmdLine(text) {
+    const div = document.createElement('div');
+    div.className = 'line';
+    div.innerHTML = promptHtml + '<span class="content-col cmd">' + escapeHtml(text) + '</span>';
+    termBody.appendChild(div);
+  }
+
+  function addOutputLine(text) {
+    const div = document.createElement('div');
+    div.className = 'output-line';
+    div.textContent = text;
+    termBody.appendChild(div);
+  }
+
+  const container = document.getElementById('original-content');
+  const children = container.childNodes;
+
+  for (let i = 0; i < children.length; i++) {
+    const node = children[i];
+    if (node.nodeType === Node.ELEMENT_NODE) {
+      const tag = node.tagName.toLowerCase();
+      if (tag === 'h1' || tag === 'h2' || tag === 'h3') {
+        addOutputLine('');
+        addCmdLine('# ' + node.textContent.trim());
+      } else if (tag === 'p') {
+        let txt = node.textContent.trim();
+        addCmdLine('echo "' + txt.replace(/"/g, '\\"') + '"');
+        addOutputLine(txt);
+      } else if (tag === 'pre' && node.classList.contains('out')) {
+        const lines = node.textContent.replace(/^\n+|\s+$/g, '').split('\n');
+        for (let l of lines) {
+          addOutputLine(l);
+        }
+      } else if (tag === 'pre') {
+        const lines = node.textContent.replace(/^\n+|\s+$/g, '').split('\n');
+        for(let l of lines) {
+          addCmdLine(l);
+        }
+      } else if (tag === 'hr') {
+        addOutputLine('─────────────────────────────────────────');
+      }
+    }
+  }
+
+  const finalPrompt = document.createElement('div');
+  finalPrompt.className = 'line';
+  finalPrompt.innerHTML = promptHtml + '<span class="cursor"></span>';
+  termBody.appendChild(finalPrompt);
+
+</script>
+</body>
+</html>
